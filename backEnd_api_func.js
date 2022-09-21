@@ -20,6 +20,92 @@ export async function findProjects() {
 
 }
 
+
+export async function findSkillsToRecalculate() {
+
+  let res = await apiClient({
+  data: {
+      query: `query{
+        findSkills(fields:{
+          recalculateMembers: true,
+          recalculateProjectRoles: true
+      }){
+        _id
+        name
+        match {
+          recalculateMembers
+          recalculateProjectRoles
+        }
+      }
+      }`,
+  },
+  })
+
+
+return (res.data.data.findSkills)
+
+}
+
+export async function matchPrepareSkillToMembers(skillID) {
+
+  let res = await apiClient({
+  data: {
+      query: `query{
+        matchPrepareSkillToMembers(fields:{
+          skillID: "${skillID}"
+      }){
+        _id
+        name
+        match {
+          recalculateMembers
+          recalculateProjectRoles
+          distanceMembers {
+            hop0
+            hop1
+            hop2
+          }
+        }
+      }
+      }`,
+  },
+  })
+
+
+return (res.data.data.matchPrepareSkillToMembers)
+
+}
+
+export async function matchPrepareSkillToProjectRoles(skillID) {
+
+  let res = await apiClient({
+  data: {
+      query: `query{
+        matchPrepareSkillToProjectRoles(fields:{
+          skillID: "${skillID}"
+      }){
+        _id
+        name
+        match {
+          recalculateMembers
+          recalculateProjectRoles
+          distanceProjectRoles {
+            hop0
+            hop1
+            hop2
+          }
+        }
+      }
+      }`,
+  },
+  })
+
+
+return (res.data.data.matchPrepareSkillToProjectRoles)
+
+}
+
+
+
 export async function CreateSkillCategory(name,id_lightcast) {
 
     let res = await apiClient({
