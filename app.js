@@ -6,6 +6,7 @@ import {findProjects,findSkillsToRecalculate,matchPrepareSkillToMembers,matchPre
 dotenv.config();
 
 
+console.log("I am alive!")
 
 
 
