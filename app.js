@@ -1,6 +1,6 @@
 
 import dotenv from "dotenv";
-import {findProjects,findSkillsToRecalculate,matchPrepareSkillToMembers,matchPrepareSkillToProjectRoles} from "./backEnd_api_func.js"
+import {findProjects,findSkillsToRecalculate,matchPrepareNode,findNodesToRecalculate,matchPrepareSkillToMembers,matchPrepareSkillToProjectRoles} from "./backEnd_api_func.js"
 
 
 dotenv.config();
@@ -15,7 +15,7 @@ console.log("I am alive!")
 const interval = setInterval( async function() {
     console.log(" --- Search for New Recalculate Skills --- " )
 
-    let res = await findSkillsToRecalculate()
+    let res = await findNodesToRecalculate()
 
 
     for (let i = 0; i < res.length; i++) {
@@ -25,7 +25,7 @@ const interval = setInterval( async function() {
         console.log("change = ",i,res.length )
 
     }
-  }, 30000);
+  }, 15000);
  
 interval 
 
@@ -34,15 +34,15 @@ interval
 
 
 
-async function findMatchToSkillForProject(skillData) {
+async function findMatchToSkillForProject(nodeData) {
 
-    // if (skillData._id.toString() == ("63098cfbb003e10004f9a9f1")) {
-        console.log("skillData = ",skillData )
+    // if (nodeData._id.toString() == ("63098cfbb003e10004f9a9f1")) {
+        console.log("nodeData = ",nodeData )
 
-        let res = await matchPrepareSkillToMembers(skillData._id)
+        let res = await matchPrepareNode(nodeData._id,"Member")
         console.log("matchPrepareSkillToMembers = " , res)
 
-        let res2 = await matchPrepareSkillToProjectRoles(skillData._id)
+        let res2 = await matchPrepareNode(nodeData._id,"Project")
         console.log("matchPrepareSkillToProjectRoles = " , res2)
     // }
     
