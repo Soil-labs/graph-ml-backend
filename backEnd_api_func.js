@@ -27,8 +27,8 @@ export async function findSkillsToRecalculate() {
   data: {
       query: `query{
         findSkills(fields:{
-          recalculateMembers: true,
-          recalculateProjectRoles: true
+          recalculateMembers: false,
+          recalculateProjectRoles: false
       }){
         _id
         name
@@ -42,7 +42,36 @@ export async function findSkillsToRecalculate() {
   })
 
 
+  
+
+
 return (res.data.data.findSkills)
+
+}
+
+
+export async function findNodesToRecalculate() {
+
+  let res = await apiClient({
+  data: {
+      query: `query{
+        findNodes(fields:{
+          matchByServer_update: true
+      }){
+        _id
+        name
+      }
+      }`,
+  },
+  }).catch((err) => {
+    console.log(err)
+  })
+
+
+  
+
+
+return (res.data.data.findNodes)
 
 }
 
@@ -72,6 +101,40 @@ export async function matchPrepareSkillToMembers(skillID) {
 
 
 return (res.data.data.matchPrepareSkillToMembers)
+
+}
+
+export async function matchPrepareNode(nodeID,find) {
+
+  let res = await apiClient({
+  data: {
+      query: `query{
+        matchPrepareNode(fields:{
+          nodeID: "${nodeID}"
+          find: ${find}
+      }){
+        _id
+        name
+        match {
+          recalculateMembers
+          recalculateProjectRoles
+          distanceMembers {
+            hop0
+            hop1
+            hop2
+          }
+        }
+      }
+      }`,
+  },
+  }).catch((err) => {
+    console.log(err)
+  })
+
+  // console.log("res = " , nodeID,find,res)
+
+
+return (res.data.data.matchPrepareNode)
 
 }
 
