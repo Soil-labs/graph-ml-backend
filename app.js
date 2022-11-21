@@ -42,7 +42,7 @@ async function findMatchToSkillForProject(nodeData) {
         let res = await matchPrepareNode(nodeData._id,"Member")
         console.log("matchPrepareSkillToMembers = " , res)
 
-        let res2 = await matchPrepareNode(nodeData._id,"Project")
+        let res2 = await matchPrepareNode(nodeData._id,"Role")
         console.log("matchPrepareSkillToProjectRoles = " , res2)
     // }
     
