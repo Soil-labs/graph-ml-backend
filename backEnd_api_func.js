@@ -1,10 +1,9 @@
-import apiClient from "./api/axios.js"
+import apiClient from "./api/axios.js";
 
 export async function findProjects() {
-
-    let res = await apiClient({
+  let res = await apiClient({
     data: {
-        query: `query{
+      query: `query{
         findProjects(fields:{
             # serverID: "996558082098339953"
         }){
@@ -14,17 +13,14 @@ export async function findProjects() {
         }
         }`,
     },
-    })
+  });
 
-  return (res.data.data.findProjects)
-
+  return res.data.data.findProjects;
 }
 
-
 export async function findSkillsToRecalculate() {
-
   let res = await apiClient({
-  data: {
+    data: {
       query: `query{
         findSkills(fields:{
           recalculateMembers: false,
@@ -38,22 +34,15 @@ export async function findSkillsToRecalculate() {
         }
       }
       }`,
-  },
-  })
+    },
+  });
 
-
-  
-
-
-return (res.data.data.findSkills)
-
+  return res.data.data.findSkills;
 }
 
-
 export async function findNodesToRecalculate() {
-
   let res = await apiClient({
-  data: {
+    data: {
       query: `query{
         findNodes(fields:{
           matchByServer_update: true
@@ -62,23 +51,17 @@ export async function findNodesToRecalculate() {
         name
       }
       }`,
-  },
+    },
   }).catch((err) => {
-    console.log(err)
-  })
+    console.log(err);
+  });
 
-
-  
-
-
-return (res.data.data.findNodes)
-
+  return res.data.data.findNodes;
 }
 
 export async function matchPrepareSkillToMembers(skillID) {
-
   let res = await apiClient({
-  data: {
+    data: {
       query: `query{
         matchPrepareSkillToMembers(fields:{
           skillID: "${skillID}"
@@ -96,18 +79,17 @@ export async function matchPrepareSkillToMembers(skillID) {
         }
       }
       }`,
-  },
-  })
+    },
+  });
 
-
-return (res.data.data.matchPrepareSkillToMembers)
-
+  return res.data.data.matchPrepareSkillToMembers;
 }
 
-export async function matchPrepareNode(nodeID,find) {
+export async function matchPrepareNode(nodeID, find) {
+  // console.log("res = ", nodeID, find);
 
   let res = await apiClient({
-  data: {
+    data: {
       query: `query{
         matchPrepareNode(fields:{
           nodeID: "${nodeID}"
@@ -126,22 +108,17 @@ export async function matchPrepareNode(nodeID,find) {
         }
       }
       }`,
-  },
+    },
   }).catch((err) => {
-    console.log(err)
-  })
+    console.log(err);
+  });
 
-  // console.log("res = " , nodeID,find,res)
-
-
-return (res.data.data.matchPrepareNode)
-
+  return res.data.data.matchPrepareNode;
 }
 
 export async function matchPrepareSkillToProjectRoles(skillID) {
-
   let res = await apiClient({
-  data: {
+    data: {
       query: `query{
         matchPrepareSkillToProjectRoles(fields:{
           skillID: "${skillID}"
@@ -159,21 +136,16 @@ export async function matchPrepareSkillToProjectRoles(skillID) {
         }
       }
       }`,
-  },
-  })
+    },
+  });
 
-
-return (res.data.data.matchPrepareSkillToProjectRoles)
-
+  return res.data.data.matchPrepareSkillToProjectRoles;
 }
 
-
-
-export async function CreateSkillCategory(name,id_lightcast) {
-
-    let res = await apiClient({
+export async function CreateSkillCategory(name, id_lightcast) {
+  let res = await apiClient({
     data: {
-        query: `mutation{
+      query: `mutation{
             updateSkillCategory(fields:{
               name: "${name}"
               
@@ -185,17 +157,15 @@ export async function CreateSkillCategory(name,id_lightcast) {
             }
           }`,
     },
-    })
+  });
 
-  return (res.data.data.updateSkillCategory)
-
+  return res.data.data.updateSkillCategory;
 }
 
-export async function CreateSkillSubCategory(name,id_lightcast) {
-
-    let res = await apiClient({
+export async function CreateSkillSubCategory(name, id_lightcast) {
+  let res = await apiClient({
     data: {
-        query: `mutation{
+      query: `mutation{
             updateSkillSubCategory(fields:{
               name: "${name}"
               
@@ -207,17 +177,20 @@ export async function CreateSkillSubCategory(name,id_lightcast) {
             }
           }`,
     },
-    })
+  });
 
-  return (res.data.data.updateSkillSubCategory)
-
+  return res.data.data.updateSkillSubCategory;
 }
 
-export async function createSkill(name,id_lightcast,categorySkills,subCategorySkill) {
-
-    let res = await apiClient({
+export async function createSkill(
+  name,
+  id_lightcast,
+  categorySkills,
+  subCategorySkill
+) {
+  let res = await apiClient({
     data: {
-        query: `mutation{
+      query: `mutation{
             createSkill(fields:{
               name: "${name}"
               state: approved
@@ -240,17 +213,14 @@ export async function createSkill(name,id_lightcast,categorySkills,subCategorySk
             }
           }`,
     },
-    })
+  });
 
-  return (res.data.data.createSkill)
-
+  return res.data.data.createSkill;
 }
 
-
-export async function relatedSkills(coreSkill_id,relatedSkill_id) {
-
+export async function relatedSkills(coreSkill_id, relatedSkill_id) {
   let res = await apiClient({
-  data: {
+    data: {
       query: `mutation{
         relatedSkills(fields:{
           _id: "${coreSkill_id}"
@@ -267,10 +237,9 @@ export async function relatedSkills(coreSkill_id,relatedSkill_id) {
             
         }
       }`,
-  },
-  })
+    },
+  });
 
-// return (res.data)
-return (res.data.data.relatedSkills)
-
+  // return (res.data)
+  return res.data.data.relatedSkills;
 }
