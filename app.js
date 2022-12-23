@@ -15,14 +15,14 @@ const interval = setInterval(async function () {
 
   let res = await findSkillsToRecalculate();
 
-  console.log("number of skills to search: = ", res.length());
+  console.log("number of skills to search: = ", res.length);
 
   for (let i = 0; i < res.length; i++) {
     findMatchToSkillForProject(res[i]);
 
-    console.log("change = ", i, res.length);
+    // console.log("change = ", i, res.length);
   }
-}, 30000);
+}, 10000);
 
 interval;
 
@@ -30,12 +30,12 @@ interval;
 
 async function findMatchToSkillForProject(skillData) {
   // if (skillData._id.toString() == ("63098cfbb003e10004f9a9f1")) {
-  console.log("skillData = ", skillData);
+  //   console.log("skillData = ", skillData);
 
   let res = await matchPrepareSkillToMembers(skillData._id);
-  console.log("matchPrepareSkillToMembers = ", res);
+  //   console.log("matchPrepareSkillToMembers = ", res);
 
   let res2 = await matchPrepareSkillToProjectRoles(skillData._id);
-  console.log("matchPrepareSkillToProjectRoles = ", res2);
+  //   console.log("matchPrepareSkillToProjectRoles = ", res2);
   // }
 }
