@@ -12,6 +12,7 @@ const baseURL = process.env.NEXT_PUBLIC_GRAPHQL_URI;
 //  const baseURL = "http://localhost:5001/graphql"
 //  const baseURL = "https://rickandmortyapi.com/graphql"
 
+console.log("baseURL = ", baseURL);
 const apiClient = axios.create({
   baseURL,
   method: "POST",

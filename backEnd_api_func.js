@@ -40,15 +40,18 @@ export async function findSkillsToRecalculate() {
   return res.data.data.findSkills;
 }
 
-export async function findNodesToRecalculate() {
+export async function findNodesToRecalculate(recalculate) {
   let res = await apiClient({
     data: {
       query: `query{
         findNodes(fields:{
-          matchByServer_update: true
+          recalculate_en: ${recalculate}
       }){
         _id
-        name
+        match_v2_update {
+          member
+          projectRole
+        }
       }
       }`,
     },
