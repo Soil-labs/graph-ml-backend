@@ -41,11 +41,11 @@ export async function findSkillsToRecalculate() {
 }
 
 export async function findNodesToRecalculate() {
+  // matchByServer_update: true
   let res = await apiClient({
     data: {
       query: `query{
         findNodes(fields:{
-          matchByServer_update: true
       }){
         _id
         name
@@ -113,7 +113,7 @@ export async function matchPrepareNode(nodeID, find) {
     console.log(err);
   });
 
-  return res.data.data.matchPrepareNode;
+  // return res.data.data.matchPrepareNode;
 }
 
 export async function matchPrepareSkillToProjectRoles(skillID) {

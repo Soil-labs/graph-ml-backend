@@ -12,19 +12,33 @@ dotenv.config();
 
 console.log("I am alive!");
 
+let max_num_updates = 1;
+let posUpdate = 0;
+
 const interval = setInterval(async function () {
   console.log(" --- Search for New Recalculate Skills --- ");
 
   let res = await findNodesToRecalculate();
 
-  console.log("num res = ", res.length);
+  console.log(" num res =  ", res.length);
+  // console.log(" posUpdate =  ", posUpdate);
 
-  for (let i = 0; i < res.length; i++) {
+  if (res.length > max_num_updates) {
+    posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
+  }
+
+  // posUpdate = 86;
+  // max_num_updates = 1;
+
+  for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
+    // for (let i = 0; i < res.length; i++) {
     findMatchToSkillForProject(res[i]);
-
+    console.log("res[i]._id = ", i, res[i]._id);
     // console.log("change = ",i,res.length )
   }
-}, 20000);
+
+  posUpdate = posUpdate + max_num_updates;
+}, 10000);
 
 interval;
 
@@ -34,10 +48,10 @@ async function findMatchToSkillForProject(nodeData) {
   // if (nodeData._id.toString() == ("63098cfbb003e10004f9a9f1")) {
   // console.log("nodeData = ", nodeData);
 
-  let res = await matchPrepareNode(nodeData._id, "Member");
+  await matchPrepareNode(nodeData._id, "Member");
   // console.log("matchPrepareSkillToMembers = ", res);
 
-  let res2 = await matchPrepareNode(nodeData._id, "Role");
+  await matchPrepareNode(nodeData._id, "Role");
   // console.log("matchPrepareSkillToProjectRoles = " , res2)
   // }
 }
