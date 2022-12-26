@@ -23,21 +23,23 @@ const interval = setInterval(async function () {
   console.log(" num res =  ", res.length);
   // console.log(" posUpdate =  ", posUpdate);
 
-  if (res.length > max_num_updates) {
-    posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
+  if (res.length > 0) {
+    if (res.length > max_num_updates) {
+      posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
+    }
+
+    // posUpdate = 86;
+    // max_num_updates = 1;
+
+    for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
+      // for (let i = 0; i < res.length; i++) {
+      findMatchToSkillForProject(res[i]);
+      console.log("res[i]._id = ", i, res[i]._id);
+      // console.log("change = ",i,res.length )
+    }
   }
 
-  // posUpdate = 86;
-  // max_num_updates = 1;
-
-  for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
-    // for (let i = 0; i < res.length; i++) {
-    findMatchToSkillForProject(res[i]);
-    console.log("res[i]._id = ", i, res[i]._id);
-    // console.log("change = ",i,res.length )
-  }
-
-  posUpdate = posUpdate + max_num_updates;
+  // posUpdate = posUpdate + max_num_updates;
 }, 10000);
 
 interval;
