@@ -59,7 +59,7 @@ export async function findNodesToRecalculate(recalculate) {
     console.log(err);
   });
 
-  return res.data.data.findNodes;
+  return res;
 }
 
 export async function matchPrepareSkillToMembers(skillID) {
@@ -100,15 +100,6 @@ export async function matchPrepareNode(nodeID, find) {
       }){
         _id
         name
-        match {
-          recalculateMembers
-          recalculateProjectRoles
-          distanceMembers {
-            hop0
-            hop1
-            hop2
-          }
-        }
       }
       }`,
     },
