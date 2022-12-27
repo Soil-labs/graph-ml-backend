@@ -12,7 +12,7 @@ dotenv.config();
 
 console.log("I am alive!");
 
-let max_num_updates = 8;
+let max_num_updates = 1;
 let posUpdate = 0;
 
 const interval = setInterval(async function () {
@@ -44,7 +44,7 @@ const interval = setInterval(async function () {
   }
 
   // posUpdate = posUpdate + max_num_updates;
-}, 20000);
+}, 30000);
 
 interval;
 
