@@ -18,7 +18,7 @@ let posUpdate = 0;
 const interval = setInterval(async function () {
   console.log(" --- Search for New Recalculate Skills --- ");
 
-  let res = await findNodesToRecalculate("All");
+  let res = await findNodesToRecalculate("Member");
 
   console.log(" num res =  ", res.length);
   // console.log(" posUpdate =  ", posUpdate);
@@ -56,9 +56,10 @@ async function findMatchToSkillForProject(nodeData) {
 
   if (nodeData.match_v2_update.member) {
     await matchPrepareNode(nodeData._id, "Member");
-  } else if (nodeData.match_v2_update.projectRole) {
-    await matchPrepareNode(nodeData._id, "ProjectRole");
   }
+  // else if (nodeData.match_v2_update.projectRole) {
+  //   await matchPrepareNode(nodeData._id, "ProjectRole");
+  // }
 
   // await matchPrepareNode(nodeData._id, "Member");
   // // console.log("matchPrepareSkillToMembers = ", res);
