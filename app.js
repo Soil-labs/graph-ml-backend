@@ -4,6 +4,7 @@ import {
   findSkillsToRecalculate,
   matchPrepareNode,
   findNodesToRecalculate,
+  findOneNode,
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
 } from "./backEnd_api_func.js";
@@ -75,8 +76,11 @@ var speed = speed_fast;
 var speed_before = speed_fast;
 var changeSpeed = speed_fast;
 
-let repeater;
+let repeater, repeater_keepOpenNeo4j;
 repeater = setInterval(repeaterFn, speed);
+
+// repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 10000);
+repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 24 * 60 * 60 * 1000);
 
 async function repeaterFn() {
   console.log("changeSpeed,speed_before = ", changeSpeed, speed_before);
@@ -115,6 +119,29 @@ async function repeaterFn() {
 function changeRepeater(speed_change) {
   console.log("change = 0.0.0");
   changeSpeed = speed_change;
+}
+
+async function keepOpenNeo4j() {
+  // run a function every day just to keep open the neo4j
+
+  console.log("test second corn = ");
+
+  let res_t = await findOneNode();
+
+  console.log("res_t.data.data = ", res_t.data.data);
+  if (res_t && res_t.data && res_t.data.data && res_t.data.data.findNodes) {
+    let res_k = res_t.data.data.findNodes;
+    // console.log("res_k = ", res_k);
+    // console.log("res_k = ", res_k[0]);
+    // console.log("res_k = ", res_k[0]._id);
+    let rt = await matchPrepareNode(res_k[0]._id, "Member");
+    // console.log("rtqw = ", rtqw);
+    // asdf;
+  }
+
+  clearInterval(repeater_keepOpenNeo4j);
+  // repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 10000);
+  repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 24 * 60 * 60 * 1000);
 }
 
 // console.log("res findSkillsToRecalculate= " )
