@@ -62,6 +62,27 @@ export async function findNodesToRecalculate(recalculate) {
   return res;
 }
 
+export async function findOneNode() {
+  let res = await apiClient({
+    data: {
+      query: `query{
+        findNodes(fields:{
+      }){
+        _id
+        match_v2_update {
+          member
+          projectRole
+        }
+      }
+      }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  return res;
+}
+
 export async function matchPrepareSkillToMembers(skillID) {
   let res = await apiClient({
     data: {
