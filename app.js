@@ -69,8 +69,8 @@ function changeInterval(res_length) {
 
 // interval;
 
-var speed_fast = 2000;
-var speed_slow = 30000;
+var speed_fast = 2500;
+var speed_slow = 60000;
 
 var speed = speed_fast;
 var speed_before = speed_fast;
