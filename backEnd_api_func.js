@@ -115,7 +115,7 @@ export async function matchPrepareNode(nodeID, find) {
   let res = await apiClient({
     data: {
       query: `query{
-        matchPrepareNode(fields:{
+        matchPrepareNode_AI4(fields:{
           nodeID: "${nodeID}"
           find: ${find}
       }){
