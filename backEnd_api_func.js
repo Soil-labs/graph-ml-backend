@@ -118,6 +118,7 @@ export async function matchPrepareNode(nodeID, find) {
         matchPrepareNode_AI4(fields:{
           nodeID: "${nodeID}"
           find: ${find}
+          distancePenalty: [1,0.3,0.1]
       }){
         _id
         name
