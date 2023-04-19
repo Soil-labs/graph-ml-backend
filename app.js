@@ -7,6 +7,7 @@ import {
   findOneNode,
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
+  updateConvSummaries,
 } from "./backEnd_api_func.js";
 
 dotenv.config();
@@ -28,46 +29,7 @@ function changeInterval(res_length) {
   }
 }
 
-// const interval = setInterval(async function () {
-//   console.log(" --- Search for New Recalculate Skills --- ");
 
-//   let res = await findNodesToRecalculate("All");
-
-//   if (res) {
-//     res = res.data.data.findNodes;
-//     console.log(" num res =  ", res.length);
-//     // console.log(" posUpdate =  ", posUpdate);
-
-//     changeInterval(res.length);
-
-//     console.log("timeRepeat = ", timeRepeat);
-
-//     // if (res.length > 0) {
-//       // if (res.length > max_num_updates) {
-//       //   posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
-//       // }
-
-//       // // posUpdate = 86;
-//       // // max_num_updates = 1;
-
-//       // if (posUpdate + max_num_updates > res.length) {
-//       //   max_num_updates = res.length - posUpdate;
-//       // }
-
-//       // for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
-//       //   // for (let i = 0; i < res.length; i++) {
-//       //   findMatchToSkillForProject(res[i]);
-//       //   console.log("res[i]._id = ", i, res[i]._id);
-//       //   // console.log("change = ",i,res.length )
-//       // }
-
-//     // }
-//   }
-
-//   // posUpdate = posUpdate + max_num_updates;
-// }, timeRepeat);
-
-// interval;
 
 var speed_fast = 2500;
 var speed_slow = 60000;
@@ -113,6 +75,10 @@ async function repeaterFn() {
       }
     } else {
       changeRepeater(speed_slow);
+      // This means taht is empty so we can update the conversations
+      console.log("update convo" )
+
+      updateConvSummaries()
     }
   }
 }
