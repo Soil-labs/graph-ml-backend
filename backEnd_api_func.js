@@ -62,6 +62,8 @@ export async function findNodesToRecalculate(recalculate) {
   return res;
 }
 
+
+
 export async function findOneNode() {
   let res = await apiClient({
     data: {
@@ -156,6 +158,32 @@ export async function matchPrepareSkillToProjectRoles(skillID) {
   });
 
   return res.data.data.matchPrepareSkillToProjectRoles;
+}
+
+export async function updateConvSummaries() {
+  let res = await apiClient({
+    data: {
+      query: `mutation{
+            updateConvSummaries(fields:{
+            }){
+              _id
+              userID
+              summary {
+                pineConeID
+                content
+              }
+              updatedAt
+              summaryReady
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  console.log("updatedConvos = " , res.data.data.updateConvSummaries)
+
+  return res.data.data.updateConvSummaries;
 }
 
 export async function CreateSkillCategory(name, id_lightcast) {
