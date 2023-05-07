@@ -35,7 +35,7 @@ repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_
 // --------------- repeatCalculateCVcompaniesUserConv ----------------
 let repeatCalculateCVcompaniesUserConvVar;
 
-const speed_CalculateCVcompaniesUserConv = 30000;
+const speed_CalculateCVcompaniesUserConv = 120000;
 repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
 // --------------- repeatCalculateCVcompaniesUserConv ----------------
 
