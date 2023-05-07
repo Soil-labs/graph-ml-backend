@@ -10,7 +10,10 @@ import {
   updateConvSummaries,
   updateCompanyUserAnswers,
   autoUpdateUserInfoFromCV,
+  autoUpdateMemoryFromCV,
 } from "./backEnd_api_func.js";
+
+
 
 dotenv.config();
 
@@ -27,24 +30,26 @@ var speed_CheckNodes = speedFast_CheckNodes;
 var speedBefore_CheckNodes = speedFast_CheckNodes;
 var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
-let repeatCheckRecalculateNodesVar
-repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+
+let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
 // --------------- repeatCheckRecalculateNodes ----------------
 
 
 // --------------- repeatCalculateCVcompaniesUserConv ----------------
-let repeatCalculateCVcompaniesUserConvVar;
-
-const speed_CalculateCVcompaniesUserConv = 120000;
-repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
+const speed_CalculateCVcompaniesUserConv = 110000;
+let repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
 // --------------- repeatCalculateCVcompaniesUserConv ----------------
+
+
+// --------------- repeatCalculateMemoryFromCV ----------------
+const speed_CalculateMemoryFromCV = 30000;
+let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
+// --------------- repeatCalculateMemoryFromCV ----------------
 
 
 
 // --------------- repeatKeepNeo4jOpen ----------------
-let  repeatKeepNeo4jOpenVar;
-
-repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
+let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
 // --------------- repeatKeepNeo4jOpen ----------------
 
 
@@ -56,9 +61,8 @@ repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
 
 
 async function repeatCheckRecalculateNodes() {
-  console.log("changeSpeed_CheckNodes,speedBefore_CheckNodes = ", changeSpeed_CheckNodes, speedBefore_CheckNodes);
+  console.log("changeSpeed_CheckNodes= ", changeSpeed_CheckNodes, speedBefore_CheckNodes);
   if (changeSpeed_CheckNodes != speedBefore_CheckNodes) {
-    console.log("change = 1.1.1");
     clearInterval(repeatCheckRecalculateNodesVar);
     speedBefore_CheckNodes = changeSpeed_CheckNodes;
     speed_CheckNodes = changeSpeed_CheckNodes;
@@ -101,8 +105,6 @@ function changeRepeater(speed_change) {
 
 async function repeatCalculateCVcompaniesUserConv() {
 
-
-  console.log("repeatCalculateCVcompaniesUserConv = " )
   
 
   let usersUpdateFromCV = await autoUpdateUserInfoFromCV()
@@ -128,6 +130,21 @@ async function repeatCalculateCVcompaniesUserConv() {
   repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
 }
 
+async function repeatCalculateMemoryFromCV() {
+
+
+
+  let autoUpdateMemoryFromCVres = await autoUpdateMemoryFromCV()
+  console.log("autoUpdateMemoryFromCVres = " , autoUpdateMemoryFromCVres)
+
+
+
+  
+  clearInterval(repeatAutoUpdateMemoryFromCVVar);
+  
+  repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
+}
+
 async function repeatKeepNeo4jOpen() {
   // run a function every day just to keep open the neo4j
 
@@ -143,7 +160,7 @@ async function repeatKeepNeo4jOpen() {
   }
 
   clearInterval(repeatKeepNeo4jOpenVar);
-  // repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 10000);
+  
   repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
 }
 
