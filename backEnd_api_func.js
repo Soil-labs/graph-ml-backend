@@ -1,4 +1,6 @@
 import apiClient from "./api/axios.js";
+import apiClientCron from "./api/axiosCron.js";
+// import apiClientCron from "./api/axiosCron.js";
 
 export async function findProjects() {
   let res = await apiClient({
@@ -161,7 +163,7 @@ export async function matchPrepareSkillToProjectRoles(skillID) {
 }
 
 export async function updateConvSummaries() {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `mutation{
             updateConvSummaries(fields:{
@@ -181,10 +183,51 @@ export async function updateConvSummaries() {
     console.log(err);
   });
 
-  console.log("updatedConvos = " , res.data.data.updateConvSummaries)
 
   return res.data.data.updateConvSummaries;
 }
+
+export async function updateCompanyUserAnswers() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+            updateCompanyUserAnswers(fields:{
+            }){
+              _id
+              name
+              candidatesReadyToDisplay
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+
+  return res.data.data.updateCompanyUserAnswers;
+}
+
+export async function autoUpdateUserInfoFromCV() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+            autoUpdateUserInfoFromCV(fields:{
+            }){
+              users {
+                _id
+                discordName
+                bio
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  return res.data.data.autoUpdateUserInfoFromCV?.users;
+}
+
 
 export async function CreateSkillCategory(name, id_lightcast) {
   let res = await apiClient({

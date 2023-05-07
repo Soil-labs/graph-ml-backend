@@ -8,6 +8,8 @@ import {
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
   updateConvSummaries,
+  updateCompanyUserAnswers,
+  autoUpdateUserInfoFromCV,
 } from "./backEnd_api_func.js";
 
 dotenv.config();
@@ -17,49 +19,60 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-let timeRepeatSlow = 6000;
-let timeRepeatFast = 1000;
-let timeRepeat = timeRepeatSlow;
+// --------------- repeatCheckRecalculateNodes ----------------
+var speedFast_CheckNodes = 2500;
+var speedSlow_CheckNodes = 6000;
 
-function changeInterval(res_length) {
-  if (res_length > 0) {
-    timeRepeat = timeRepeatFast;
-  } else {
-    timeRepeat = timeRepeatSlow;
-  }
-}
+var speed_CheckNodes = speedFast_CheckNodes;
+var speedBefore_CheckNodes = speedFast_CheckNodes;
+var changeSpeed_CheckNodes = speedFast_CheckNodes;
+
+let repeatCheckRecalculateNodesVar
+repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// --------------- repeatCheckRecalculateNodes ----------------
+
+
+// --------------- repeatCalculateCVcompaniesUserConv ----------------
+let repeatCalculateCVcompaniesUserConvVar;
+
+const speed_CalculateCVcompaniesUserConv = 30000;
+repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
+// --------------- repeatCalculateCVcompaniesUserConv ----------------
 
 
 
-var speed_fast = 2500;
-var speed_slow = 60000;
+// --------------- repeatKeepNeo4jOpen ----------------
+let  repeatKeepNeo4jOpenVar;
 
-var speed = speed_fast;
-var speed_before = speed_fast;
-var changeSpeed = speed_fast;
+repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
+// --------------- repeatKeepNeo4jOpen ----------------
 
-let repeater, repeater_keepOpenNeo4j;
-repeater = setInterval(repeaterFn, speed);
 
-// repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 10000);
-repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 24 * 60 * 60 * 1000);
 
-async function repeaterFn() {
-  console.log("changeSpeed,speed_before = ", changeSpeed, speed_before);
-  if (changeSpeed != speed_before) {
+
+
+
+
+
+
+async function repeatCheckRecalculateNodes() {
+  console.log("changeSpeed_CheckNodes,speedBefore_CheckNodes = ", changeSpeed_CheckNodes, speedBefore_CheckNodes);
+  if (changeSpeed_CheckNodes != speedBefore_CheckNodes) {
     console.log("change = 1.1.1");
-    clearInterval(repeater);
-    speed_before = changeSpeed;
-    speed = changeSpeed;
-    repeater = setInterval(repeaterFn, speed);
+    clearInterval(repeatCheckRecalculateNodesVar);
+    speedBefore_CheckNodes = changeSpeed_CheckNodes;
+    speed_CheckNodes = changeSpeed_CheckNodes;
+    repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
   }
+
+
 
   let res = await findNodesToRecalculate("All");
   if (res) {
     res = res.data.data.findNodes;
     console.log("res.length = ", res.length);
     if (res.length > 0) {
-      changeRepeater(speed_fast);
+      changeRepeater(speedFast_CheckNodes);
 
       if (res.length > max_num_updates) {
         posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
@@ -71,43 +84,67 @@ async function repeaterFn() {
 
       for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
         findMatchToSkillForProject(res[i]);
-        console.log("res[i]._id = ", i, res[i]._id);
+        // console.log("res[i]._id = ", i, res[i]._id);
       }
     } else {
-      changeRepeater(speed_slow);
-      // This means taht is empty so we can update the conversations
-      console.log("update convo" )
+      changeRepeater(speedSlow_CheckNodes);
 
-      updateConvSummaries()
     }
   }
 }
+
 function changeRepeater(speed_change) {
-  console.log("change = 0.0.0");
-  changeSpeed = speed_change;
+  changeSpeed_CheckNodes = speed_change;
+
+  return changeSpeed_CheckNodes;
 }
 
-async function keepOpenNeo4j() {
+async function repeatCalculateCVcompaniesUserConv() {
+
+
+  console.log("repeatCalculateCVcompaniesUserConv = " )
+  
+
+  let usersUpdateFromCV = await autoUpdateUserInfoFromCV()
+  console.log("usersUpdateFromCV = " , usersUpdateFromCV)
+
+
+  if (usersUpdateFromCV?.length == 0) {
+    let updateConvoRes = await updateConvSummaries()
+    console.log("updateConvoRes = " , updateConvoRes)
+
+
+    if (updateConvoRes?.length == 0) {
+
+      let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
+      console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
+    }
+  }
+
+
+  
+  clearInterval(repeatCalculateCVcompaniesUserConvVar);
+  
+  repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
+}
+
+async function repeatKeepNeo4jOpen() {
   // run a function every day just to keep open the neo4j
 
-  console.log("test second corn = ");
 
   let res_t = await findOneNode();
 
   console.log("res_t.data.data = ", res_t.data.data);
   if (res_t && res_t.data && res_t.data.data && res_t.data.data.findNodes) {
     let res_k = res_t.data.data.findNodes;
-    // console.log("res_k = ", res_k);
-    // console.log("res_k = ", res_k[0]);
-    // console.log("res_k = ", res_k[0]._id);
+    
     let rt = await matchPrepareNode(res_k[0]._id, "Member");
-    // console.log("rtqw = ", rtqw);
-    // asdf;
+    
   }
 
-  clearInterval(repeater_keepOpenNeo4j);
-  // repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 10000);
-  repeater_keepOpenNeo4j = setInterval(keepOpenNeo4j, 24 * 60 * 60 * 1000);
+  clearInterval(repeatKeepNeo4jOpenVar);
+  // repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 10000);
+  repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
 }
 
 // console.log("res findSkillsToRecalculate= " )
