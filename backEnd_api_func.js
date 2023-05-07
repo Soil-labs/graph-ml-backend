@@ -229,6 +229,27 @@ export async function autoUpdateUserInfoFromCV() {
 }
 
 
+export async function autoUpdateMemoryFromCV() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+          autoUpdateMemoryFromCV(fields:{
+            }){
+              users {
+                _id
+                discordName
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  return res.data.data.autoUpdateMemoryFromCV?.users;
+}
+
+
 export async function CreateSkillCategory(name, id_lightcast) {
   let res = await apiClient({
     data: {
