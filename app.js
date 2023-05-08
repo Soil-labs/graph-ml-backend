@@ -35,16 +35,23 @@ let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, sp
 // --------------- repeatCheckRecalculateNodes ----------------
 
 
-// --------------- repeatCalculateCVcompaniesUserConv ----------------
-const speed_CalculateCVcompaniesUserConv = 110000;
-let repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
-// --------------- repeatCalculateCVcompaniesUserConv ----------------
+// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+const speed_CalculateCVsummaryJobsNodes = 110000;
+let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
+// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
 
 // --------------- repeatCalculateMemoryFromCV ----------------
 const speed_CalculateMemoryFromCV = 30000;
 let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
 // --------------- repeatCalculateMemoryFromCV ----------------
+
+
+// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+const speed_CalculateUpdateConvCompanyAnswers = 40000;
+let repeatCalculateUpdateConvCompanyAnswersVar = setInterval(repeatCalculateUpdateConvCompanyAnswersFunc, speed_CalculateUpdateConvCompanyAnswers);
+// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+
 
 
 
@@ -103,7 +110,7 @@ function changeRepeater(speed_change) {
   return changeSpeed_CheckNodes;
 }
 
-async function repeatCalculateCVcompaniesUserConv() {
+async function repeatCalculateCVsummaryJobsNodesFunc() {
 
   
 
@@ -111,23 +118,43 @@ async function repeatCalculateCVcompaniesUserConv() {
   console.log("usersUpdateFromCV = " , usersUpdateFromCV)
 
 
-  if (usersUpdateFromCV?.length == 0) {
-    let updateConvoRes = await updateConvSummaries()
-    console.log("updateConvoRes = " , updateConvoRes)
+  // if (usersUpdateFromCV?.length == 0) {
+  //   let updateConvoRes = await updateConvSummaries()
+  //   console.log("updateConvoRes = " , updateConvoRes)
 
 
-    if (updateConvoRes?.length == 0) {
+  //   if (updateConvoRes?.length == 0) {
 
-      let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
-      console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
-    }
+  //     let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
+  //     console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
+  //   }
+  // }
+
+
+  
+  clearInterval(repeatCalculateCVsummaryJobsNodesVar);
+  
+  repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
+}
+
+async function repeatCalculateUpdateConvCompanyAnswersFunc() {
+
+  
+  let updateConvoRes = await updateConvSummaries()
+  console.log("updateConvoRes = " , updateConvoRes)
+
+
+  if (updateConvoRes?.length == 0) {
+
+    let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
+    console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
   }
 
 
   
-  clearInterval(repeatCalculateCVcompaniesUserConvVar);
+  clearInterval(repeatCalculateUpdateConvCompanyAnswersVar);
   
-  repeatCalculateCVcompaniesUserConvVar = setInterval(repeatCalculateCVcompaniesUserConv, speed_CalculateCVcompaniesUserConv);
+  repeatCalculateUpdateConvCompanyAnswersVar = setInterval(repeatCalculateUpdateConvCompanyAnswersFunc, speed_CalculateUpdateConvCompanyAnswers);
 }
 
 async function repeatCalculateMemoryFromCV() {
