@@ -61,10 +61,10 @@ let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 100
 // --------------- repeatKeepNeo4jOpen ----------------
 
 
-// --------------- updateCompanyConvRecruiterFunc ----------------
-const speed_updateCompanyConvRecruiter = 20000;
-let repeat_updateCompanyConvRecruiter = setInterval(updateCompanyConvRecruiterFunc, speed_updateCompanyConvRecruiter);
-// --------------- updateCompanyConvRecruiterFunc ----------------
+// // --------------- updateCompanyConvRecruiterFunc ----------------
+// const speed_updateCompanyConvRecruiter = 20000;
+// let repeat_updateCompanyConvRecruiter = setInterval(updateCompanyConvRecruiterFunc, speed_updateCompanyConvRecruiter);
+// // --------------- updateCompanyConvRecruiterFunc ----------------
 
 
 
@@ -153,6 +153,10 @@ async function repeatCalculateUpdateConvCompanyAnswersFunc() {
 
     let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
     console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
+
+    
+    let updateCompanyConvRecruiterRes = await updateCompanyConvRecruiter()
+    console.log("updateCompanyConvRecruiterRes ->= " , updateCompanyConvRecruiterRes)
   }
 
 
