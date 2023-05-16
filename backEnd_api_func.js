@@ -187,6 +187,40 @@ export async function updateConvSummaries() {
   return res.data.data.updateConvSummaries;
 }
 
+export async function updateCompanyConvRecruiter() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+            updateCompanyConvRecruiter(fields:{
+            }){
+              _id
+              convRecruiter {
+                user {
+                  _id
+                  discordName
+                }
+                readyToDisplay
+                companyQuestions {
+                  question
+                  content
+                }
+                roleQuestions {
+                  question
+                  content
+                }
+              }
+              convRecruiterReadyToDisplay
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+
+  return res.data.data.updateCompanyConvRecruiter;
+}
+
 export async function updateCompanyUserAnswers() {
   let res = await apiClientCron({
     data: {

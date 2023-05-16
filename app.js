@@ -11,6 +11,7 @@ import {
   updateCompanyUserAnswers,
   autoUpdateUserInfoFromCV,
   autoUpdateMemoryFromCV,
+  updateCompanyConvRecruiter,
 } from "./backEnd_api_func.js";
 
 
@@ -47,10 +48,10 @@ let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, s
 // --------------- repeatCalculateMemoryFromCV ----------------
 
 
-// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+// --------------- repeatCalculateUpdateConvCompanyAnswersFunc ----------------
 const speed_CalculateUpdateConvCompanyAnswers = 40000;
 let repeatCalculateUpdateConvCompanyAnswersVar = setInterval(repeatCalculateUpdateConvCompanyAnswersFunc, speed_CalculateUpdateConvCompanyAnswers);
-// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+// --------------- repeatCalculateUpdateConvCompanyAnswersFunc ----------------
 
 
 
@@ -60,6 +61,10 @@ let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 100
 // --------------- repeatKeepNeo4jOpen ----------------
 
 
+// --------------- updateCompanyConvRecruiterFunc ----------------
+const speed_updateCompanyConvRecruiter = 20000;
+let repeat_updateCompanyConvRecruiter = setInterval(updateCompanyConvRecruiterFunc, speed_updateCompanyConvRecruiter);
+// --------------- updateCompanyConvRecruiterFunc ----------------
 
 
 
@@ -155,6 +160,18 @@ async function repeatCalculateUpdateConvCompanyAnswersFunc() {
   clearInterval(repeatCalculateUpdateConvCompanyAnswersVar);
   
   repeatCalculateUpdateConvCompanyAnswersVar = setInterval(repeatCalculateUpdateConvCompanyAnswersFunc, speed_CalculateUpdateConvCompanyAnswers);
+}
+
+async function updateCompanyConvRecruiterFunc() {
+
+  
+  let updateCompanyConvRecruiterRes = await updateCompanyConvRecruiter()
+  console.log("updateCompanyConvRecruiterRes ->= " , updateCompanyConvRecruiterRes)
+
+
+  
+  clearInterval(repeat_updateCompanyConvRecruiter);
+  repeat_updateCompanyConvRecruiter = setInterval(updateCompanyConvRecruiterFunc, speed_updateCompanyConvRecruiter);
 }
 
 async function repeatCalculateMemoryFromCV() {
