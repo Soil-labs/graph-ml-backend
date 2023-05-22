@@ -187,11 +187,11 @@ export async function updateConvSummaries() {
   return res.data.data.updateConvSummaries;
 }
 
-export async function updateCompanyConvRecruiter() {
+export async function updatePositionConvRecruiter() {
   let res = await apiClientCron({
     data: {
       query: `mutation{
-            updateCompanyConvRecruiter(fields:{
+            updatePositionConvRecruiter(fields:{
             }){
               _id
               convRecruiter {
@@ -200,7 +200,7 @@ export async function updateCompanyConvRecruiter() {
                   discordName
                 }
                 readyToDisplay
-                companyQuestions {
+                positionQuestions {
                   question
                   content
                 }
@@ -218,14 +218,14 @@ export async function updateCompanyConvRecruiter() {
   });
 
 
-  return res.data.data.updateCompanyConvRecruiter;
+  return res.data.data.updatePositionConvRecruiter;
 }
 
-export async function updateCompanyUserAnswers() {
+export async function updatePositionUserAnswers() {
   let res = await apiClientCron({
     data: {
       query: `mutation{
-            updateCompanyUserAnswers(fields:{
+            updatePositionUserAnswers(fields:{
             }){
               _id
               name
@@ -238,7 +238,7 @@ export async function updateCompanyUserAnswers() {
   });
 
 
-  return res.data.data.updateCompanyUserAnswers;
+  return res.data.data.updatePositionUserAnswers;
 }
 
 export async function autoUpdateUserInfoFromCV() {
