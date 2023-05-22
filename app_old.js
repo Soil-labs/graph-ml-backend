@@ -8,7 +8,7 @@ import {
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
   updateConvSummaries,
-  updateCompanyUserAnswers,
+  updatePositionUserAnswers,
   autoUpdateUserInfoFromCV,
 } from "./backEnd_api_func.js";
 
@@ -84,9 +84,9 @@ async function repeatCheckRecalculateNodes() {
 
   //         if (updateConvoRes.length == 0) {
 
-  //           let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
+  //           let updatePositionUserAnswersRes = await updatePositionUserAnswers()
 
-  //           console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
+  //           console.log("updatePositionUserAnswersRes = " , updatePositionUserAnswersRes)
 
 
   //         }

@@ -8,10 +8,10 @@ import {
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
   updateConvSummaries,
-  updateCompanyUserAnswers,
+  updatePositionUserAnswers,
   autoUpdateUserInfoFromCV,
   autoUpdateMemoryFromCV,
-  updateCompanyConvRecruiter,
+  updatePositionConvRecruiter,
 } from "./backEnd_api_func.js";
 
 
@@ -48,10 +48,10 @@ let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, s
 // --------------- repeatCalculateMemoryFromCV ----------------
 
 
-// --------------- repeatCalculateUpdateConvCompanyAnswersFunc ----------------
-const speed_CalculateUpdateConvCompanyAnswers = 40000;
-let repeatCalculateUpdateConvCompanyAnswersVar = setInterval(repeatCalculateUpdateConvCompanyAnswersFunc, speed_CalculateUpdateConvCompanyAnswers);
-// --------------- repeatCalculateUpdateConvCompanyAnswersFunc ----------------
+// --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
+const speed_CalculateUpdateConvPositionAnswers = 40000;
+let repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
+// --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
 
 
 
@@ -61,10 +61,10 @@ let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 100
 // --------------- repeatKeepNeo4jOpen ----------------
 
 
-// // --------------- updateCompanyConvRecruiterFunc ----------------
-// const speed_updateCompanyConvRecruiter = 20000;
-// let repeat_updateCompanyConvRecruiter = setInterval(updateCompanyConvRecruiterFunc, speed_updateCompanyConvRecruiter);
-// // --------------- updateCompanyConvRecruiterFunc ----------------
+// // --------------- updatePositionConvRecruiterFunc ----------------
+// const speed_updatePositionConvRecruiter = 20000;
+// let repeat_updatePositionConvRecruiter = setInterval(updatePositionConvRecruiterFunc, speed_updatePositionConvRecruiter);
+// // --------------- updatePositionConvRecruiterFunc ----------------
 
 
 
@@ -130,8 +130,8 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
 
   //   if (updateConvoRes?.length == 0) {
 
-  //     let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
-  //     console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
+  //     let updatePositionUserAnswersRes = await updatePositionUserAnswers()
+  //     console.log("updatePositionUserAnswersRes = " , updatePositionUserAnswersRes)
   //   }
   // }
 
@@ -142,7 +142,7 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
   repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
 }
 
-async function repeatCalculateUpdateConvCompanyAnswersFunc() {
+async function repeatCalculateUpdateConvPositionAnswersFunc() {
 
   
   let updateConvoRes = await updateConvSummaries()
@@ -151,31 +151,31 @@ async function repeatCalculateUpdateConvCompanyAnswersFunc() {
 
   if (updateConvoRes?.length == 0) {
 
-    let updateCompanyUserAnswersRes = await updateCompanyUserAnswers()
-    console.log("updateCompanyUserAnswersRes = " , updateCompanyUserAnswersRes)
+    let updatePositionUserAnswersRes = await updatePositionUserAnswers()
+    console.log("updatePositionUserAnswersRes = " , updatePositionUserAnswersRes)
 
     
-    let updateCompanyConvRecruiterRes = await updateCompanyConvRecruiter()
-    console.log("updateCompanyConvRecruiterRes ->= " , updateCompanyConvRecruiterRes)
+    let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
+    console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
   }
 
 
   
-  clearInterval(repeatCalculateUpdateConvCompanyAnswersVar);
+  clearInterval(repeatCalculateUpdateConvPositionAnswersVar);
   
-  repeatCalculateUpdateConvCompanyAnswersVar = setInterval(repeatCalculateUpdateConvCompanyAnswersFunc, speed_CalculateUpdateConvCompanyAnswers);
+  repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
 }
 
-async function updateCompanyConvRecruiterFunc() {
+async function updatePositionConvRecruiterFunc() {
 
   
-  let updateCompanyConvRecruiterRes = await updateCompanyConvRecruiter()
-  console.log("updateCompanyConvRecruiterRes ->= " , updateCompanyConvRecruiterRes)
+  let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
+  console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
 
 
   
-  clearInterval(repeat_updateCompanyConvRecruiter);
-  repeat_updateCompanyConvRecruiter = setInterval(updateCompanyConvRecruiterFunc, speed_updateCompanyConvRecruiter);
+  clearInterval(repeat_updatePositionConvRecruiter);
+  repeat_updatePositionConvRecruiter = setInterval(updatePositionConvRecruiterFunc, speed_updatePositionConvRecruiter);
 }
 
 async function repeatCalculateMemoryFromCV() {
