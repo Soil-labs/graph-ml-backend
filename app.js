@@ -42,10 +42,10 @@ let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJ
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
 
-// --------------- repeatCalculateMemoryFromCV ----------------
-const speed_CalculateMemoryFromCV = 45000;
-let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
-// --------------- repeatCalculateMemoryFromCV ----------------
+// // --------------- repeatCalculateMemoryFromCV ----------------
+// const speed_CalculateMemoryFromCV = 45000;
+// let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
+// // --------------- repeatCalculateMemoryFromCV ----------------
 
 
 // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
