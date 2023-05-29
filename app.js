@@ -159,13 +159,20 @@ async function repeatCalculateUpdateConvPositionAnswersFunc() {
     
     let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
     console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
+
+
+
+    clearInterval(repeatCalculateUpdateConvPositionAnswersVar);
+    
+    repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
   }
 
 
-  
-  clearInterval(repeatCalculateUpdateConvPositionAnswersVar);
-  
-  repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
+  if (updateConvoRes !== undefined) {
+    clearInterval(repeatCalculateUpdateConvPositionAnswersVar);
+    
+    repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
+  }
 }
 
 async function updatePositionConvRecruiterFunc() {
