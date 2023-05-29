@@ -96,7 +96,7 @@ async function repeatCheckRecalculateNodes() {
   // }
 }
 function changeRepeater(speed_change) {
-  console.log("change = 0.0.0");
+  // console.log("change = 0.0.0");
   changeSpeed_CheckNodes = speed_change;
 
   return changeSpeed_CheckNodes;

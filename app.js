@@ -73,7 +73,6 @@ let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 100
 
 
 async function repeatCheckRecalculateNodes() {
-  console.log("changeSpeed_CheckNodes= ", changeSpeed_CheckNodes, speedBefore_CheckNodes);
   if (changeSpeed_CheckNodes != speedBefore_CheckNodes) {
     clearInterval(repeatCheckRecalculateNodesVar);
     speedBefore_CheckNodes = changeSpeed_CheckNodes;
@@ -106,6 +105,9 @@ async function repeatCheckRecalculateNodes() {
       changeRepeater(speedSlow_CheckNodes);
 
     }
+  } else {
+    console.log("changeSpeed_CheckNodes= ", changeSpeed_CheckNodes, speedBefore_CheckNodes);
+
   }
 }
 
