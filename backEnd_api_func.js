@@ -163,8 +163,8 @@ export async function matchPrepareSkillToProjectRoles(skillID) {
 }
 
 export async function updateConvSummaries() {
-  let res = await apiClient({
-    // let res = await apiClientCron({
+  // let res = await apiClient({
+    let res = await apiClientCron({
     data: {
       query: `mutation{
             updateConvSummaries(fields:{
