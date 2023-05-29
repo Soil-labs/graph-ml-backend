@@ -23,17 +23,17 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-// --------------- repeatCheckRecalculateNodes ----------------
-var speedFast_CheckNodes = 2500;
-var speedSlow_CheckNodes = 6000;
+// // --------------- repeatCheckRecalculateNodes ----------------
+// var speedFast_CheckNodes = 2500;
+// var speedSlow_CheckNodes = 6000;
 
-var speed_CheckNodes = speedFast_CheckNodes;
-var speedBefore_CheckNodes = speedFast_CheckNodes;
-var changeSpeed_CheckNodes = speedFast_CheckNodes;
+// var speed_CheckNodes = speedFast_CheckNodes;
+// var speedBefore_CheckNodes = speedFast_CheckNodes;
+// var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
 
-let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
-// --------------- repeatCheckRecalculateNodes ----------------
+// let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// // --------------- repeatCheckRecalculateNodes ----------------
 
 
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
@@ -49,7 +49,7 @@ let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJ
 
 
 // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
-const speed_CalculateUpdateConvPositionAnswers = 40000;
+const speed_CalculateUpdateConvPositionAnswers = 130000;
 let repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
 // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
 
@@ -148,7 +148,7 @@ async function repeatCalculateUpdateConvPositionAnswersFunc() {
 
   
   let updateConvoRes = await updateConvSummaries()
-  console.log("updateConvoRes =  " , updateConvoRes)
+  console.log("updateConvoRes = -------------------0-0-0-0- " , updateConvoRes)
 
 
   if (updateConvoRes?.length == 0) {
