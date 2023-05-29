@@ -148,7 +148,7 @@ async function repeatCalculateUpdateConvPositionAnswersFunc() {
 
   
   let updateConvoRes = await updateConvSummaries()
-  console.log("updateConvoRes = " , updateConvoRes)
+  console.log("updateConvoRes =  " , updateConvoRes)
 
 
   if (updateConvoRes?.length == 0) {
