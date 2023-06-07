@@ -223,6 +223,7 @@ export async function updatePositionConvRecruiter() {
 }
 
 export async function updatePositionUserAnswers() {
+  // let res = await apiClient({
   let res = await apiClientCron({
     data: {
       query: `mutation{

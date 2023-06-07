@@ -23,21 +23,21 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-// --------------- repeatCheckRecalculateNodes ----------------
-var speedFast_CheckNodes = 2500;
-var speedSlow_CheckNodes = 6000;
+// // --------------- repeatCheckRecalculateNodes ----------------
+// var speedFast_CheckNodes = 2500;
+// var speedSlow_CheckNodes = 6000;
 
-var speed_CheckNodes = speedFast_CheckNodes;
-var speedBefore_CheckNodes = speedFast_CheckNodes;
-var changeSpeed_CheckNodes = speedFast_CheckNodes;
+// var speed_CheckNodes = speedFast_CheckNodes;
+// var speedBefore_CheckNodes = speedFast_CheckNodes;
+// var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
 
-let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
-// --------------- repeatCheckRecalculateNodes ----------------
+// let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// // --------------- repeatCheckRecalculateNodes ----------------
 
 
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
-const speed_CalculateCVsummaryJobsNodes = 110000;
+const speed_CalculateCVsummaryJobsNodes = 105000;
 let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
@@ -48,10 +48,10 @@ let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJ
 // // --------------- repeatCalculateMemoryFromCV ----------------
 
 
-// --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
-const speed_CalculateUpdateConvPositionAnswers = 130000;
-let repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
-// --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
+// // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
+// const speed_CalculateUpdateConvPositionAnswers = 170000;
+// let repeatCalculateUpdateConvPositionAnswersVar = setInterval(repeatCalculateUpdateConvPositionAnswersFunc, speed_CalculateUpdateConvPositionAnswers);
+// // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
 
 
 
@@ -125,17 +125,20 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
   console.log("usersUpdateFromCV = " , usersUpdateFromCV)
 
 
-  // if (usersUpdateFromCV?.length == 0) {
-  //   let updateConvoRes = await updateConvSummaries()
-  //   console.log("updateConvoRes = " , updateConvoRes)
+  if (usersUpdateFromCV?.length == 0) {
+    let updateConvoRes = await updateConvSummaries()
+    console.log("updateConvoRes = " , updateConvoRes)
 
 
-  //   if (updateConvoRes?.length == 0) {
+    if (updateConvoRes?.length == 0) {
 
-  //     let updatePositionUserAnswersRes = await updatePositionUserAnswers()
-  //     console.log("updatePositionUserAnswersRes = " , updatePositionUserAnswersRes)
-  //   }
-  // }
+      let updatePositionUserAnswersRes = await updatePositionUserAnswers()
+      console.log("updatePositionUserAnswersRes -= " , updatePositionUserAnswersRes)
+
+      let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
+      console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes
+    }
+  }
 
 
   
