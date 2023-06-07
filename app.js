@@ -136,7 +136,7 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
       console.log("updatePositionUserAnswersRes -= " , updatePositionUserAnswersRes)
 
       let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
-      console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes
+      console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
     }
   }
 
