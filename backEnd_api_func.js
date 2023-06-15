@@ -1,6 +1,5 @@
 import apiClient from "./api/axios.js";
 import apiClientCron from "./api/axiosCron.js";
-// import apiClientCron from "./api/axiosCron.js";
 
 export async function findProjects() {
   let res = await apiClient({
@@ -387,3 +386,25 @@ export async function relatedSkills(coreSkill_id, relatedSkill_id) {
   // return (res.data)
   return res.data.data.relatedSkills;
 }
+
+export async function autoUpdateUserInfoFromCVSubsccriptionVersion( userID ) {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+            autoUpdateUserInfoFromCV(fields:{userIDs: [${userID}]}){
+              users {
+                _id
+                discordName
+                bio
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  return res.data.data.autoUpdateUserInfoFromCV?.users;
+}
+
+

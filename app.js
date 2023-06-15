@@ -14,6 +14,7 @@ import {
   updatePositionConvRecruiter,
 } from "./backEnd_api_func.js";
 
+import { userCVSavedSubscription } from "./subscription_api_func.js"
 
 
 dotenv.config();
@@ -22,6 +23,9 @@ console.log("I am alive!");
 
 let max_num_updates = 1;
 let posUpdate = 0;
+
+// -------------- subscription saved cv method ------------------
+userCVSavedSubscription();
 
 // --------------- repeatCheckRecalculateNodes ----------------
 var speedFast_CheckNodes = 2500;
