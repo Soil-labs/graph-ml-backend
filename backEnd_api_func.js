@@ -1,7 +1,5 @@
 import apiClient from "./api/axios.js";
 import apiClientCron from "./api/axiosCron.js";
-import subscriptionClient from "./api/subscriptionClient.js";
-// import apiClientCron from "./api/axiosCron.js";
 
 export async function findProjects() {
   let res = await apiClient({
