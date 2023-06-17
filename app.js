@@ -125,7 +125,7 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
   console.log("usersUpdateFromCV = " , usersUpdateFromCV)
 
 
-  if (usersUpdateFromCV?.length == 0) {
+  if (usersUpdateFromCV?.users && usersUpdateFromCV?.users?.length == 0) {
     let updateConvoRes = await updateConvSummaries()
     console.log("updateConvoRes = " , updateConvoRes)
 
