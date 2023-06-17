@@ -14,11 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "graphql-ws": "^5.13.1",
-    "node-fetch": "^3.2.10",
-    "subscriptions-transport-ws": "^0.11.0",
-    "websocket": "^1.0.34",
-    "ws": "^8.13.0"
+    "node-fetch": "^3.2.10"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",

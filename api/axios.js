@@ -7,7 +7,6 @@ dotenv.config();
 //   ? process.env.REACT_APP_DOMAIN_NAME + "/graphql"
 //   : "http://localhost:5001/graphql";
 
-
 const baseURL = process.env.NEXT_PUBLIC_GRAPHQL_URI;
 // const baseURL = "https://soil-api-backend-kgfromaicron.up.railway.app/graphql"
 //  const baseURL = "https://oasis-bot-test-deploy.herokuapp.com/graphql"
