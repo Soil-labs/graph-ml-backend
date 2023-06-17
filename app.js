@@ -23,17 +23,17 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-// --------------- repeatCheckRecalculateNodes ----------------
-var speedFast_CheckNodes = 2500;
-var speedSlow_CheckNodes = 6000;
+// // --------------- repeatCheckRecalculateNodes ----------------
+// var speedFast_CheckNodes = 2500;
+// var speedSlow_CheckNodes = 6000;
 
-var speed_CheckNodes = speedFast_CheckNodes;
-var speedBefore_CheckNodes = speedFast_CheckNodes;
-var changeSpeed_CheckNodes = speedFast_CheckNodes;
+// var speed_CheckNodes = speedFast_CheckNodes;
+// var speedBefore_CheckNodes = speedFast_CheckNodes;
+// var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
 
-let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
-// --------------- repeatCheckRecalculateNodes ----------------
+// let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// // --------------- repeatCheckRecalculateNodes ----------------
 
 
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
@@ -125,7 +125,7 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
   console.log("usersUpdateFromCV = " , usersUpdateFromCV)
 
 
-  if (usersUpdateFromCV?.length == 0) {
+  if (usersUpdateFromCV?.users && usersUpdateFromCV?.users?.length == 0) {
     let updateConvoRes = await updateConvSummaries()
     console.log("updateConvoRes = " , updateConvoRes)
 

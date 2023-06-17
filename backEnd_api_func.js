@@ -261,7 +261,7 @@ export async function autoUpdateUserInfoFromCV() {
     console.log(err);
   });
 
-  return res.data.data.autoUpdateUserInfoFromCV?.users;
+  return res.data.data.autoUpdateUserInfoFromCV;
 }
 
 
