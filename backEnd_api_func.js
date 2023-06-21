@@ -282,7 +282,7 @@ export async function autoUpdateMemoryFromCV() {
     console.log(err);
   });
 
-  return res.data.data.autoUpdateMemoryFromCV?.users;
+  return res.data.data.autoUpdateMemoryFromCV;
 }
 
 
