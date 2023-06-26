@@ -243,6 +243,34 @@ export async function updatePositionUserAnswers() {
   return res.data.data.updatePositionUserAnswers;
 }
 
+export async function updateAnalysisEdenAICandidates() {
+  // let res = await apiClient({
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+        updateAnalysisEdenAICandidates(fields:{
+            }){
+              _id
+              candidatesFlagAnalysisCreated
+              candidates {
+                analysisCandidateEdenAI {
+                  flagAnalysisCreated
+                  background {
+                    content
+                  }
+                }
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+
+  return res.data.data.updateAnalysisEdenAICandidates;
+}
+
 export async function autoUpdateUserInfoFromCV() {
   let res = await apiClientCron({
     data: {
