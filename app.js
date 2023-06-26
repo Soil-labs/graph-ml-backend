@@ -8,6 +8,7 @@ import {
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
   updateConvSummaries,
+  updateAnalysisEdenAICandidates,
   updatePositionUserAnswers,
   autoUpdateUserInfoFromCV,
   autoUpdateMemoryFromCV,
@@ -137,6 +138,11 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
 
       let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
       console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
+
+      if (updatePositionUserAnswersRes?.length == 0) {
+        let updateAnalysisEdenAICandidatesRes = await updateAnalysisEdenAICandidates()
+        console.log("updateAnalysisEdenAICandidatesRes -k-= " , updateAnalysisEdenAICandidatesRes)
+      }
     }
   }
 
