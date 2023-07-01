@@ -313,6 +313,30 @@ export async function autoUpdateMemoryFromCV() {
   return res.data.data.autoUpdateMemoryFromCV;
 }
 
+export async function autoUpdateMemoryFromPositionRequirments() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+          autoUpdateMemoryFromPositionRequirments(fields:{
+            }){
+              positions {
+                _id
+                name
+                positionsRequirements {
+                  positionPreparationMemory
+                  originalContent
+                }
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  return res.data.data.autoUpdateMemoryFromPositionRequirments;
+}
+
 
 export async function CreateSkillCategory(name, id_lightcast) {
   let res = await apiClient({
