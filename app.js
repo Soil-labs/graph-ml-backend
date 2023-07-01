@@ -8,6 +8,7 @@ import {
   matchPrepareSkillToMembers,
   matchPrepareSkillToProjectRoles,
   updateConvSummaries,
+  autoUpdateMemoryFromPositionRequirments,
   updateAnalysisEdenAICandidates,
   updatePositionUserAnswers,
   autoUpdateUserInfoFromCV,
@@ -24,29 +25,34 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-// --------------- repeatCheckRecalculateNodes ----------------
-var speedFast_CheckNodes = 2500;
-var speedSlow_CheckNodes = 6000;
+// // --------------- repeatCheckRecalculateNodes ----------------
+// var speedFast_CheckNodes = 2500;
+// var speedSlow_CheckNodes = 6000;
 
-var speed_CheckNodes = speedFast_CheckNodes;
-var speedBefore_CheckNodes = speedFast_CheckNodes;
-var changeSpeed_CheckNodes = speedFast_CheckNodes;
-
-
-let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
-// --------------- repeatCheckRecalculateNodes ----------------
+// var speed_CheckNodes = speedFast_CheckNodes;
+// var speedBefore_CheckNodes = speedFast_CheckNodes;
+// var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
 
-// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
-const speed_CalculateCVsummaryJobsNodes = 105000;
-let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
-// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+// let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// // --------------- repeatCheckRecalculateNodes ----------------
+
+
+// // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+// const speed_CalculateCVsummaryJobsNodes = 105000;
+// let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
+// // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
 
 // --------------- repeatCalculateMemoryFromCV ----------------
-const speed_CalculateMemoryFromCV = 80000;
+const speed_CalculateMemoryFromCV = 70000;
 let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
 // --------------- repeatCalculateMemoryFromCV ----------------
+
+// --------------- autoUpdateMemoryFromPositionRequirments ----------------
+const speed_autoUpdateMemoryFromPositionRequirments = 90000;
+let autoUpdateMemoryFromPositionRequirmentsVar = setInterval(repeatAutoUpdateMemoryFromPositionRequirments, speed_autoUpdateMemoryFromPositionRequirments);
+// --------------- autoUpdateMemoryFromPositionRequirments ----------------
 
 
 // // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
@@ -197,18 +203,26 @@ async function updatePositionConvRecruiterFunc() {
 }
 
 async function repeatCalculateMemoryFromCV() {
-
-
-
   let autoUpdateMemoryFromCVres = await autoUpdateMemoryFromCV()
   console.log("autoUpdateMemoryFromCVres = " , autoUpdateMemoryFromCVres)
 
 
-
-  
   clearInterval(repeatAutoUpdateMemoryFromCVVar);
   
   repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
+}
+
+
+async function repeatAutoUpdateMemoryFromPositionRequirments() {
+
+  let autoUpdateMemoryFromPositionRequirmentsRES = await autoUpdateMemoryFromPositionRequirments()
+  console.log("autoUpdateMemoryFromPositionRequirmentsRES = " , autoUpdateMemoryFromPositionRequirmentsRES)
+
+
+
+  clearInterval(autoUpdateMemoryFromPositionRequirmentsVar);
+  
+  autoUpdateMemoryFromPositionRequirmentsVar = setInterval(repeatAutoUpdateMemoryFromPositionRequirments, speed_autoUpdateMemoryFromPositionRequirments);
 }
 
 async function repeatKeepNeo4jOpen() {
