@@ -25,23 +25,23 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-// // --------------- repeatCheckRecalculateNodes ----------------
-// var speedFast_CheckNodes = 2500;
-// var speedSlow_CheckNodes = 6000;
+// --------------- repeatCheckRecalculateNodes ----------------
+var speedFast_CheckNodes = 2500;
+var speedSlow_CheckNodes = 6000;
 
-// var speed_CheckNodes = speedFast_CheckNodes;
-// var speedBefore_CheckNodes = speedFast_CheckNodes;
-// var changeSpeed_CheckNodes = speedFast_CheckNodes;
-
-
-// let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
-// // --------------- repeatCheckRecalculateNodes ----------------
+var speed_CheckNodes = speedFast_CheckNodes;
+var speedBefore_CheckNodes = speedFast_CheckNodes;
+var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
 
-// // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
-// const speed_CalculateCVsummaryJobsNodes = 105000;
-// let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
-// // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// --------------- repeatCheckRecalculateNodes ----------------
+
+
+// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
+const speed_CalculateCVsummaryJobsNodes = 105000;
+let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
+// --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
 
 // --------------- repeatCalculateMemoryFromCV ----------------
