@@ -50,7 +50,7 @@ let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, s
 // --------------- repeatCalculateMemoryFromCV ----------------
 
 // --------------- autoUpdateMemoryFromPositionRequirments ----------------
-const speed_autoUpdateMemoryFromPositionRequirments = 90000;
+const speed_autoUpdateMemoryFromPositionRequirments = 130000;
 let autoUpdateMemoryFromPositionRequirmentsVar = setInterval(repeatAutoUpdateMemoryFromPositionRequirments, speed_autoUpdateMemoryFromPositionRequirments);
 // --------------- autoUpdateMemoryFromPositionRequirments ----------------
 
