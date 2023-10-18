@@ -93,6 +93,7 @@ async function repeatCheckRecalculateNodes() {
   if (res) {
     res = res.data.data.findNodes;
     if (res){
+      console.log("res.length = ", res.length);
       if (res.length > 0) {
         changeRepeater(speedFast_CheckNodes);
 
