@@ -92,26 +92,27 @@ async function repeatCheckRecalculateNodes() {
   let res = await findNodesToRecalculate("All");
   if (res) {
     res = res.data.data.findNodes;
-    console.log("res.length = ", res.length);
-    if (res.length > 0) {
-      changeRepeater(speedFast_CheckNodes);
+    if (res){
+      if (res.length > 0) {
+        changeRepeater(speedFast_CheckNodes);
 
-      if (res.length > max_num_updates) {
-        posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
+        if (res.length > max_num_updates) {
+          posUpdate = Math.floor(Math.random() * (res.length - max_num_updates));
+        }
+
+        if (posUpdate + max_num_updates > res.length) {
+          max_num_updates = res.length - posUpdate;
+        }
+
+        for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
+          findMatchToSkillForProject(res[i]);
+          // console.log("res[i]._id = ", i, res[i]._id);
+        }
+      } else {
+        changeRepeater(speedSlow_CheckNodes);
+
       }
-
-      if (posUpdate + max_num_updates > res.length) {
-        max_num_updates = res.length - posUpdate;
-      }
-
-      for (let i = posUpdate; i < posUpdate + max_num_updates; i++) {
-        findMatchToSkillForProject(res[i]);
-        // console.log("res[i]._id = ", i, res[i]._id);
-      }
-    } else {
-      changeRepeater(speedSlow_CheckNodes);
-
-    }
+  }
   } else {
     console.log("changeSpeed_CheckNodes= ", changeSpeed_CheckNodes, speedBefore_CheckNodes);
 
