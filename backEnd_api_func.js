@@ -184,8 +184,9 @@ export async function updateConvSummaries() {
     console.log(err);
   });
 
-
-  return res.data.data.updateConvSummaries;
+  if (res && res.data && res.data.data && res.data.data.updateConvSummaries) {
+    return res.data.data.updateConvSummaries;
+  }
 }
 
 export async function updatePositionConvRecruiter() {
