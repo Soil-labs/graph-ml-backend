@@ -17,7 +17,12 @@ export async function findProjects() {
     },
   });
 
-  return res.data.data.findProjects;
+  if (res && res.data && res.data.data && res.data.data.findProjects) {
+    return res.data.data.findProjects;
+  } else {
+    console.error('Error in findProjects: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function findSkillsToRecalculate() {
@@ -39,7 +44,12 @@ export async function findSkillsToRecalculate() {
     },
   });
 
-  return res.data.data.findSkills;
+  if (res && res.data && res.data.data && res.data.data.findSkills) {
+    return res.data.data.findSkills;
+  } else {
+    console.error('Error in findSkillsToRecalculate: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function findNodesToRecalculate(recalculate) {
@@ -61,7 +71,12 @@ export async function findNodesToRecalculate(recalculate) {
     console.log(err);
   });
 
-  return res;
+  if (res && res.data && res.data.data && res.data.data.findNodes) {
+    return res.data.data.findNodes;
+  } else {
+    console.error('Error in findNodesToRecalculate: response is undefined or malformed');
+    return null;
+  }
 }
 
 
@@ -84,7 +99,13 @@ export async function findOneNode() {
     console.log(err);
   });
 
-  return res;
+  if (res && res.data && res.data.data && res.data.data.findNodes) {
+    return res.data.data.findNodes;
+  } else {
+    console.error('Error in findOneNode: response is undefined or malformed');
+    return null;
+  
+  }
 }
 
 export async function matchPrepareSkillToMembers(skillID) {
@@ -110,7 +131,12 @@ export async function matchPrepareSkillToMembers(skillID) {
     },
   });
 
-  return res.data.data.matchPrepareSkillToMembers;
+  if (res && res.data && res.data.data && res.data.data.matchPrepareSkillToMembers) {
+    return res.data.data.matchPrepareSkillToMembers;
+  } else {
+    console.error('Error in matchPrepareSkillToMembers: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function matchPrepareNode(nodeID, find) {
@@ -133,7 +159,12 @@ export async function matchPrepareNode(nodeID, find) {
     console.log(err);
   });
 
-  // return res.data.data.matchPrepareNode;
+  if (res && res.data && res.data.data && res.data.data.matchPrepareNode_AI4) {
+    return res.data.data.matchPrepareNode_AI4;
+  } else {
+    console.error('Error in matchPrepareNode: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function matchPrepareSkillToProjectRoles(skillID) {
@@ -159,7 +190,12 @@ export async function matchPrepareSkillToProjectRoles(skillID) {
     },
   });
 
-  return res.data.data.matchPrepareSkillToProjectRoles;
+  if (res && res.data && res.data.data && res.data.data.matchPrepareSkillToProjectRoles) {
+    return res.data.data.matchPrepareSkillToProjectRoles;
+  } else {
+    console.error('Error in matchPrepareSkillToProjectRoles: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function updateConvSummaries() {
@@ -184,8 +220,11 @@ export async function updateConvSummaries() {
     console.log(err);
   });
 
-  if (res && res.data && res.data.data && res.data.data.updateConvSummaries) {
+  if (res && res.data && res.data.data && res.data.data) {
     return res.data.data.updateConvSummaries;
+  } else {
+    console.error('Error in updateConvSummaries: response is undefined or malformed');
+    return null;
   }
 }
 
@@ -220,8 +259,14 @@ export async function updatePositionConvRecruiter() {
   });
 
 
-  return res.data.data.updatePositionConvRecruiter;
+  if (res && res.data && res.data.data && res.data.data.updatePositionConvRecruiter) {
+    return res.data.data.updatePositionConvRecruiter;
+  } else {
+    console.error('Error in updatePositionConvRecruiter: response is undefined or malformed');
+    return null;
+  }
 }
+
 
 export async function updatePositionUserAnswers() {
   // let res = await apiClient({
@@ -241,7 +286,12 @@ export async function updatePositionUserAnswers() {
   });
 
 
-  return res.data.data.updatePositionUserAnswers;
+  if (res && res.data && res.data.data) {
+    return res.data.data.updatePositionUserAnswers;
+  } else {
+    console.error('Error in updatePositionUserAnswers: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function updateAnalysisEdenAICandidates() {
@@ -290,7 +340,12 @@ export async function autoUpdateUserInfoFromCV() {
     console.log(err);
   });
 
-  return res.data.data.autoUpdateUserInfoFromCV;
+  if (res && res.data && res.data.data) {
+    return res.data.data.autoUpdateUserInfoFromCV;
+  } else {
+    console.error('Error in autoUpdateUserInfoFromCV: response is undefined or malformed');
+    return null;
+  }
 }
 
 
@@ -311,8 +366,127 @@ export async function autoUpdateMemoryFromCV() {
     console.log(err);
   });
 
-  return res.data.data.autoUpdateMemoryFromCV;
+  if (res && res.data && res.data.data && res.data.data.autoUpdateMemoryFromCV) {
+    return res.data.data.autoUpdateMemoryFromCV;
+  } else {
+    console.error('Error in autoUpdateMemoryFromCV: response is undefined or malformed');
+    return null;
+  }
 }
+
+export async function autoCreateCardsCandidatesAndScore() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+          autoCreateCardsCandidatesAndScore(fields:{
+            }){
+              _id
+              name
+              company {
+                slug
+              }
+              allCandidateScoreCardCalculated
+              candidates {
+                user {
+                  _id
+                  discordName
+                }
+                candidateScoreCardCalculated
+                scoreCardTotal {
+                  score
+                  scoreCardCalculated
+                }
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  if (res && res.data && res.data.data ) {
+    return res.data.data.autoCreateCardsCandidatesAndScore;
+  } else {
+    console.error('Error in autoCreateCardsCandidatesAndScore: response is undefined or malformed');
+    return null
+  }
+}
+
+
+export async function autoCreateCardsForPosition() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+          autoCreateCardsForPosition(fields:{
+            }){
+              _id
+              content
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  if (res && res.data && res.data.data ) {
+    return res.data.data.autoCreateCardsForPosition;
+  } else {
+    console.error('Error in autoCreateCardsForPosition: response is undefined or malformed');
+    return null
+  }
+}
+
+export async function wait(x) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+      return "yo"
+    }, x*1000);
+  });
+}
+
+
+export async function autoCalculatePrioritiesAndQuestions() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+          autoCalculatePrioritiesAndQuestions(fields:{
+            }){
+              _id
+              name
+              prioritiesPositionCalculated
+
+              positionsRequirements {
+                originalContent
+                priorities {
+                  priority
+                }
+                tradeOffs {
+                  tradeOff1
+                  tradeOff2
+                }
+              }
+              questionsToAsk {
+                question {
+                  _id
+                  content
+                }
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  if (res && res.data && res.data.data) {
+    return res.data.data.autoCalculatePrioritiesAndQuestions;
+  } else {
+    console.error('Error in autoCalculatePrioritiesAndQuestions: response is undefined or malformed');
+    return null;
+  }
+}
+
 
 export async function autoUpdateMemoryFromPositionRequirments() {
   let res = await apiClientCron({
@@ -335,7 +509,12 @@ export async function autoUpdateMemoryFromPositionRequirments() {
     console.log(err);
   });
 
-  return res.data.data.autoUpdateMemoryFromPositionRequirments;
+  if (res && res.data && res.data.data) {
+    return res.data.data.autoUpdateMemoryFromPositionRequirments;
+  } else {
+    console.error('Error in autoUpdateMemoryFromPositionRequirments: response is undefined or malformed');
+    return null;
+  }
 }
 
 
@@ -356,7 +535,12 @@ export async function CreateSkillCategory(name, id_lightcast) {
     },
   });
 
-  return res.data.data.updateSkillCategory;
+  if (res && res.data && res.data.data) {
+    return res.data.data.updateSkillCategory;
+  } else {
+    console.error('Error in updateSkillCategory: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function CreateSkillSubCategory(name, id_lightcast) {
@@ -376,7 +560,12 @@ export async function CreateSkillSubCategory(name, id_lightcast) {
     },
   });
 
-  return res.data.data.updateSkillSubCategory;
+  if (res && res.data && res.data.data) {
+    return res.data.data.updateSkillSubCategory;
+  } else {
+    console.error('Error in updateSkillSubCategory: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function createSkill(
@@ -412,7 +601,12 @@ export async function createSkill(
     },
   });
 
-  return res.data.data.createSkill;
+  if (res && res.data && res.data.data) {
+    return res.data.data.createSkill;
+  } else {
+    console.error('Error in createSkill: response is undefined or malformed');
+    return null;
+  }
 }
 
 export async function relatedSkills(coreSkill_id, relatedSkill_id) {
@@ -438,5 +632,10 @@ export async function relatedSkills(coreSkill_id, relatedSkill_id) {
   });
 
   // return (res.data)
-  return res.data.data.relatedSkills;
+  if (res && res.data && res.data.data) {
+    return res.data.data.relatedSkills;
+  } else {
+    console.error('Error in relatedSkills: response is undefined or malformed');
+    return null;
+  }
 }
