@@ -13,7 +13,11 @@ import {
   updatePositionUserAnswers,
   autoUpdateUserInfoFromCV,
   autoUpdateMemoryFromCV,
+  autoCreateCardsForPosition,
+  autoCalculatePrioritiesAndQuestions,
   updatePositionConvRecruiter,
+  autoCreateCardsCandidatesAndScore,
+  wait,
 } from "./backEnd_api_func.js";
 
 
@@ -25,17 +29,42 @@ console.log("I am alive!");
 let max_num_updates = 1;
 let posUpdate = 0;
 
-// --------------- repeatCheckRecalculateNodes ----------------
-var speedFast_CheckNodes = 2500;
-var speedSlow_CheckNodes = 6000;
+// await wait(5)
+// f1
 
-var speed_CheckNodes = speedFast_CheckNodes;
-var speedBefore_CheckNodes = speedFast_CheckNodes;
-var changeSpeed_CheckNodes = speedFast_CheckNodes;
+// // --------------- repeatCheckRecalculateNodes ----------------
+// var speedFast_CheckNodes = 2500;
+// var speedSlow_CheckNodes = 6000;
+
+// var speed_CheckNodes = speedFast_CheckNodes;
+// var speedBefore_CheckNodes = speedFast_CheckNodes;
+// var changeSpeed_CheckNodes = speedFast_CheckNodes;
 
 
-let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
-// --------------- repeatCheckRecalculateNodes ----------------
+// let repeatCheckRecalculateNodesVar = setInterval(repeatCheckRecalculateNodes, speed_CheckNodes);
+// // --------------- repeatCheckRecalculateNodes ----------------
+
+let startTime = performance.now();
+// --------------- autoCreateCardsCandidatesAndScore ----------------
+startTime = performance.now();
+let promiseAutoCreateCardsCandidatesAndScore
+let autoCreateCardsCandidatesAndScoreVar = setTimeout(() => autoCreateCardsCandidatesAndScoreFunc(true,promiseAutoCreateCardsCandidatesAndScore,startTime));
+// --------------- autoCreateCardsCandidatesAndScore ----------------
+
+await wait(5)
+// --------------- autoCalculatePrioritiesAndQuestions ----------------
+startTime = performance.now();
+let promiseAutoCalculatePrioritiesAndQuestions
+let autoCalculatePrioritiesAndQuestionsVar = setTimeout(() => autoCalculatePrioritiesAndQuestionsFunc(true,promiseAutoCalculatePrioritiesAndQuestions,startTime));
+// --------------- autoCalculatePrioritiesAndQuestions ----------------
+
+await wait(5)
+
+// --------------- autoCreateCardsForPosition ----------------
+startTime = performance.now();
+let promiseAutoCreateCardsForPosition
+let autoCreateCardsForPositionVar = setTimeout(() => autoCreateCardsForPositionFunc(true,promiseAutoCreateCardsForPosition,startTime));
+// --------------- autoCreateCardsForPosition ----------------
 
 
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
@@ -44,15 +73,25 @@ let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJ
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
 
-// --------------- repeatCalculateMemoryFromCV ----------------
-const speed_CalculateMemoryFromCV = 70000;
-let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
-// --------------- repeatCalculateMemoryFromCV ----------------
 
-// --------------- autoUpdateMemoryFromPositionRequirments ----------------
-const speed_autoUpdateMemoryFromPositionRequirments = 130000;
-let autoUpdateMemoryFromPositionRequirmentsVar = setInterval(repeatAutoUpdateMemoryFromPositionRequirments, speed_autoUpdateMemoryFromPositionRequirments);
-// --------------- autoUpdateMemoryFromPositionRequirments ----------------
+// // --------------- autoUpdateMemoryFromPositionRequirments ----------------
+// const speed_autoUpdateMemoryFromPositionRequirments = 130000;
+// let autoUpdateMemoryFromPositionRequirmentsVar = setInterval(repeatAutoUpdateMemoryFromPositionRequirments, speed_autoUpdateMemoryFromPositionRequirments);
+// // --------------- autoUpdateMemoryFromPositionRequirments ----------------
+
+
+
+
+// // --------------- autoCreateCardsForPosition ----------------
+// const speed_autoCreateCardsForPosition = 50000;
+// let autoCreateCardsForPositionVar = setInterval(repeatAutoCreateCardsForPosition, speed_autoCreateCardsForPosition);
+// // --------------- autoCreateCardsForPosition ----------------
+
+// // --------------- repeatCalculateMemoryFromCV ----------------
+// const speed_CalculateMemoryFromCV = 70000;
+// let repeatAutoUpdateMemoryFromCVVar = setInterval(repeatCalculateMemoryFromCV, speed_CalculateMemoryFromCV);
+// // --------------- repeatCalculateMemoryFromCV ----------------
+
 
 
 // // --------------- repeatCalculateUpdateConvPositionAnswersFunc ----------------
@@ -126,6 +165,100 @@ function changeRepeater(speed_change) {
   return changeSpeed_CheckNodes;
 }
 
+async function autoCreateCardsCandidatesAndScoreFunc(doneCardCandidate,promiseCardCandidate,startTime) {
+
+  if (doneCardCandidate) {
+    promiseCardCandidate = autoCreateCardsCandidatesAndScore() // this is the function 
+  }
+
+  doneCardCandidate = false
+  
+  promiseCardCandidate.then(async (resAutoCreateCardCandidate) => {
+
+    console.log("resAutoCreateCardCandidate = ",resAutoCreateCardCandidate)
+
+    doneCardCandidate = true;
+    
+    const endTime = performance.now();
+    const durationInSeconds = (endTime - startTime) / (60*1000); // Calculate duration in seconds
+    // console.log("Function has ended. Repeat",durationInSeconds);
+
+    // ------------- If the function came back too fast then wait a bit ---------
+    if (durationInSeconds < 5){
+      await wait(30) 
+    }
+    // ------------- If the function came back too fast then wait a bit ---------
+
+
+    clearTimeout(autoCreateCardsCandidatesAndScoreVar); // clear the timeout when the function has ended
+    autoCreateCardsCandidatesAndScoreVar = setTimeout(() => autoCreateCardsCandidatesAndScoreFunc(doneCardCandidate,promiseCardCandidate,performance.now()));
+
+  })
+  
+}
+
+async function autoCalculatePrioritiesAndQuestionsFunc(donePriorityQuestion, promisePriorityQuestion, startTime) {
+
+  if (donePriorityQuestion) {
+    promisePriorityQuestion = autoCalculatePrioritiesAndQuestions() // this is the function 
+  }
+
+  donePriorityQuestion = false
+  
+  promisePriorityQuestion.then(async (resAutoCalculatePriorityQuestion) => {
+
+    console.log("resAutoCalculatePriorityQuestion = ",resAutoCalculatePriorityQuestion)
+
+    donePriorityQuestion = true;
+    
+    const endTime = performance.now();
+    const durationInSeconds = (endTime - startTime) / (60*1000); // Calculate duration in seconds
+    // console.log("Function has ended. Repeat",durationInSeconds);
+
+    // ------------- If the function came back too fast then wait a bit ---------
+    if (durationInSeconds < 5){
+      await wait(30) 
+    }
+    // ------------- If the function came back too fast then wait a bit ---------
+
+    clearTimeout(autoCalculatePrioritiesAndQuestionsVar); // clear the timeout when the function has ended
+    autoCalculatePrioritiesAndQuestionsVar = setTimeout(() => autoCalculatePrioritiesAndQuestionsFunc(donePriorityQuestion,promisePriorityQuestion,performance.now()));
+
+  })
+  
+}
+
+async function autoCreateCardsForPositionFunc(doneCardPosition, promiseCardPosition, startTime) {
+
+  if (doneCardPosition) {
+    promiseCardPosition = autoCreateCardsForPosition() // this is the function 
+  }
+
+  doneCardPosition = false
+  
+  promiseCardPosition.then(async (resAutoCreateCardPosition) => {
+
+    console.log("resAutoCreateCardPosition = ",resAutoCreateCardPosition)
+
+    doneCardPosition = true;
+    
+    const endTime = performance.now();
+    const durationInSeconds = (endTime - startTime) / (60*1000); // Calculate duration in seconds
+    // console.log("Function has ended. Repeat",durationInSeconds);
+
+    // ------------- If the function came back too fast then wait a bit ---------
+    if (durationInSeconds < 5){
+      await wait(30) 
+    }
+    // ------------- If the function came back too fast then wait a bit ---------
+
+    clearTimeout(autoCreateCardsForPositionVar); // clear the timeout when the function has ended
+    autoCreateCardsForPositionVar = setTimeout(() => autoCreateCardsForPositionFunc(doneCardPosition,promiseCardPosition,performance.now()));
+
+  })
+  
+}
+
 async function repeatCalculateCVsummaryJobsNodesFunc() {
 
   
@@ -135,23 +268,21 @@ async function repeatCalculateCVsummaryJobsNodesFunc() {
 
 
   if (usersUpdateFromCV?.users && usersUpdateFromCV?.users?.length == 0) {
-    let updateConvoRes = await updateConvSummaries()
-    console.log("updateConvoRes = " , updateConvoRes)
-
-
-    if (updateConvoRes?.length == 0) {
-
-      let updatePositionUserAnswersRes = await updatePositionUserAnswers()
-      console.log("updatePositionUserAnswersRes -= " , updatePositionUserAnswersRes)
-
-      let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
-      console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
-
-      if (updatePositionUserAnswersRes?.length == 0) {
-        let updateAnalysisEdenAICandidatesRes = await updateAnalysisEdenAICandidates()
-        console.log("updateAnalysisEdenAICandidatesRes -k-= " , updateAnalysisEdenAICandidatesRes)
-      }
-    }
+    // let updateConvoRes = await updateConvSummaries()
+    // console.log("updateConvoRes = " , updateConvoRes)
+    
+    
+    // if (updateConvoRes?.length == 0) {
+      
+      //   let updatePositionUserAnswersRes = await updatePositionUserAnswers()
+      //   console.log("updatePositionUserAnswersRes -= " , updatePositionUserAnswersRes)
+      
+      //   let updatePositionConvRecruiterRes = await updatePositionConvRecruiter()
+      //   console.log("updatePositionConvRecruiterRes ->= " , updatePositionConvRecruiterRes)
+      
+    let updateAnalysisEdenAICandidatesRes = await updateAnalysisEdenAICandidates()
+    console.log("updateAnalysisEdenAICandidatesRes -k-= " , updateAnalysisEdenAICandidatesRes)
+    // }
   }
 
 
@@ -202,6 +333,17 @@ async function updatePositionConvRecruiterFunc() {
   
   clearInterval(repeat_updatePositionConvRecruiter);
   repeat_updatePositionConvRecruiter = setInterval(updatePositionConvRecruiterFunc, speed_updatePositionConvRecruiter);
+}
+
+async function repeatAutoCreateCardsForPosition() {
+  // let autoCreateCardsForPositionRes = await autoCreateCardsForPosition()
+  let autoCreateCardsForPositionRes = await autoCalculatePrioritiesAndQuestions()
+  console.log("autoCreateCardsForPositionRes = " , autoCreateCardsForPositionRes)
+
+
+  clearInterval(autoCreateCardsForPositionVar);
+  
+  autoCreateCardsForPositionVar = setInterval(repeatAutoCreateCardsForPosition, speed_autoCreateCardsForPosition);
 }
 
 async function repeatCalculateMemoryFromCV() {
