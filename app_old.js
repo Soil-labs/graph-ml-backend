@@ -109,7 +109,6 @@ async function repeatCalculateNodes() {
 
   let res_t = await findOneNode();
 
-  console.log("res_t.data.data = ", res_t.data.data);
   if (res_t && res_t.data && res_t.data.data && res_t.data.data.findNodes) {
     let res_k = res_t.data.data.findNodes;
     
