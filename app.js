@@ -17,6 +17,7 @@ import {
   autoCalculatePrioritiesAndQuestions,
   updatePositionConvRecruiter,
   autoCreateCardsCandidatesAndScore,
+  connectMemoriesToKnowledgeGraph_V2,
   wait,
 } from "./backEnd_api_func.js";
 
@@ -67,8 +68,20 @@ let autoCreateCardsForPositionVar = setTimeout(() => autoCreateCardsForPositionF
 // --------------- autoCreateCardsForPosition ----------------
 
 
+await wait(5)
+
+// --------------- connectMemoriesToKnowledgeGraph_V2 ----------------
+startTime = performance.now();
+let promiseConnectMemoriesToKnowledgeGraph_V2
+let autoConnectMemoriesToKnowledgeGraph_V2Var = setTimeout(() => autoConnectMemoriesToKnowledgeGraph_V2Func(true,promiseConnectMemoriesToKnowledgeGraph_V2,startTime));
+// --------------- connectMemoriesToKnowledgeGraph_V2 ----------------
+
+
+
+
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 const speed_CalculateCVsummaryJobsNodes = 105000;
+// const speed_CalculateCVsummaryJobsNodes = 55000;
 let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJobsNodesFunc, speed_CalculateCVsummaryJobsNodes);
 // --------------- repeatCalculateCVsummaryJobsNodesFunc ----------------
 
@@ -259,6 +272,37 @@ async function autoCreateCardsForPositionFunc(doneCardPosition, promiseCardPosit
   
 }
 
+async function autoConnectMemoriesToKnowledgeGraph_V2Func(doneConnectMemories, promiseConnectMemories, startTime) {
+
+  if (doneConnectMemories) {
+    promiseConnectMemories = connectMemoriesToKnowledgeGraph_V2() // this is the function 
+  }
+
+  doneConnectMemories = false
+  
+  promiseConnectMemories.then(async (resConnectMemoriesToKnowledgeGraph_V2) => {
+
+    console.log("resConnectMemoriesToKnowledgeGraph_V2 = ",resConnectMemoriesToKnowledgeGraph_V2)
+
+    doneConnectMemories = true;
+    
+    const endTime = performance.now();
+    const durationInSeconds = (endTime - startTime) / (60*1000); // Calculate duration in seconds
+    // console.log("Function has ended. Repeat",durationInSeconds);
+
+    // ------------- If the function came back too fast then wait a bit ---------
+    if (durationInSeconds < 5){
+      await wait(30) 
+    }
+    // ------------- If the function came back too fast then wait a bit ---------
+
+    clearTimeout(autoConnectMemoriesToKnowledgeGraph_V2Var); // clear the timeout when the function has ended
+    autoConnectMemoriesToKnowledgeGraph_V2Var = setTimeout(() => autoConnectMemoriesToKnowledgeGraph_V2Func(doneConnectMemories,promiseConnectMemories,performance.now()));
+
+  })
+  
+}
+
 async function repeatCalculateCVsummaryJobsNodesFunc() {
 
   
@@ -335,16 +379,16 @@ async function updatePositionConvRecruiterFunc() {
   repeat_updatePositionConvRecruiter = setInterval(updatePositionConvRecruiterFunc, speed_updatePositionConvRecruiter);
 }
 
-async function repeatAutoCreateCardsForPosition() {
-  // let autoCreateCardsForPositionRes = await autoCreateCardsForPosition()
-  let autoCreateCardsForPositionRes = await autoCalculatePrioritiesAndQuestions()
-  console.log("autoCreateCardsForPositionRes = " , autoCreateCardsForPositionRes)
+// async function repeatAutoCreateCardsForPosition() {
+//   // let autoCreateCardsForPositionRes = await autoCreateCardsForPosition()
+//   let autoCreateCardsForPositionRes = await autoCalculatePrioritiesAndQuestions()
+//   console.log("autoCreateCardsForPositionRes = " , autoCreateCardsForPositionRes)
 
 
-  clearInterval(autoCreateCardsForPositionVar);
+//   clearInterval(autoCreateCardsForPositionVar);
   
-  autoCreateCardsForPositionVar = setInterval(repeatAutoCreateCardsForPosition, speed_autoCreateCardsForPosition);
-}
+//   autoCreateCardsForPositionVar = setInterval(repeatAutoCreateCardsForPosition, speed_autoCreateCardsForPosition);
+// }
 
 async function repeatCalculateMemoryFromCV() {
   let autoUpdateMemoryFromCVres = await autoUpdateMemoryFromCV()

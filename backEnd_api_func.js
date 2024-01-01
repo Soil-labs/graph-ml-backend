@@ -445,6 +445,50 @@ export async function wait(x) {
   });
 }
 
+export async function connectMemoriesToKnowledgeGraph_V2() {
+  let res = await apiClientCron({
+    data: {
+      query: `mutation{
+        connectMemoriesToKnowledgeGraph_V2(fields:{
+              runAuto: MEMBER
+            }){
+              userConnectedToKG {
+                _id
+                discordName
+              }
+              usersLeft
+              node {
+                _id
+                name
+                relatedNodes {
+                  _id
+                  name
+                }
+                graphNeighbors {
+                  node {
+                    _id
+                    name
+                  }
+                  hopN
+                  weightTotal
+                }
+              }
+            }
+          }`,
+    },
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  if (res && res.data && res.data.data ) {
+    return res.data.data.connectMemoriesToKnowledgeGraph_V2;
+  } else {
+    console.error('Error in connectMemoriesToKnowledgeGraph_V2: response is undefined or malformed');
+    return null
+  }
+}
+
+
 
 export async function autoCalculatePrioritiesAndQuestions() {
   let res = await apiClientCron({
