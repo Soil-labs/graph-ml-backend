@@ -3,7 +3,7 @@ import apiClientCron from "./api/axiosCron.js";
 // import apiClientCron from "./api/axiosCron.js";
 
 export async function findProjects() {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         findProjects(fields:{
@@ -26,7 +26,7 @@ export async function findProjects() {
 }
 
 export async function findSkillsToRecalculate() {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         findSkills(fields:{
@@ -53,7 +53,7 @@ export async function findSkillsToRecalculate() {
 }
 
 export async function findNodesToRecalculate(recalculate) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         findNodes(fields:{
@@ -82,7 +82,7 @@ export async function findNodesToRecalculate(recalculate) {
 
 
 export async function findOneNode() {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         findNodes(fields:{
@@ -109,7 +109,7 @@ export async function findOneNode() {
 }
 
 export async function matchPrepareSkillToMembers(skillID) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         matchPrepareSkillToMembers(fields:{
@@ -142,7 +142,7 @@ export async function matchPrepareSkillToMembers(skillID) {
 export async function matchPrepareNode(nodeID, find) {
   // console.log("res = ", nodeID, find);
 
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         matchPrepareNode_AI4(fields:{
@@ -168,7 +168,7 @@ export async function matchPrepareNode(nodeID, find) {
 }
 
 export async function matchPrepareSkillToProjectRoles(skillID) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `query{
         matchPrepareSkillToProjectRoles(fields:{
@@ -199,7 +199,7 @@ export async function matchPrepareSkillToProjectRoles(skillID) {
 }
 
 export async function updateConvSummaries() {
-  // let res = await apiClient({
+  // let res = await apiClientCron({
     let res = await apiClientCron({
     data: {
       query: `mutation{
@@ -269,7 +269,7 @@ export async function updatePositionConvRecruiter() {
 
 
 export async function updatePositionUserAnswers() {
-  // let res = await apiClient({
+  // let res = await apiClientCron({
   let res = await apiClientCron({
     data: {
       query: `mutation{
@@ -295,7 +295,7 @@ export async function updatePositionUserAnswers() {
 }
 
 export async function updateAnalysisEdenAICandidates() {
-  // let res = await apiClient({
+  // let res = await apiClientCron({
   let res = await apiClientCron({
     data: {
       query: `mutation{
@@ -563,7 +563,7 @@ export async function autoUpdateMemoryFromPositionRequirments() {
 
 
 export async function CreateSkillCategory(name, id_lightcast) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `mutation{
             updateSkillCategory(fields:{
@@ -588,7 +588,7 @@ export async function CreateSkillCategory(name, id_lightcast) {
 }
 
 export async function CreateSkillSubCategory(name, id_lightcast) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `mutation{
             updateSkillSubCategory(fields:{
@@ -618,7 +618,7 @@ export async function createSkill(
   categorySkills,
   subCategorySkill
 ) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `mutation{
             createSkill(fields:{
@@ -654,7 +654,7 @@ export async function createSkill(
 }
 
 export async function relatedSkills(coreSkill_id, relatedSkill_id) {
-  let res = await apiClient({
+  let res = await apiClientCron({
     data: {
       query: `mutation{
         relatedSkills(fields:{
