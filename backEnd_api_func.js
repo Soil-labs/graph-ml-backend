@@ -139,6 +139,27 @@ export async function matchPrepareSkillToMembers(skillID) {
   }
 }
 
+export async function pingNeo4j() {
+  let res = await apiClientCron({
+    data: {
+      query: `query{
+        pingNeo4j(fields:{
+      }){
+        _id
+        name
+      }
+      }`,
+    },
+  });
+
+  if (res && res.data && res.data.data && res.data.data.pingNeo4j) {
+    return res.data.data.pingNeo4j;
+  } else {
+    console.error('Error in pingNeo4j: response is undefined or malformed');
+    return null;
+  }
+}
+
 export async function matchPrepareNode(nodeID, find) {
   // console.log("res = ", nodeID, find);
 

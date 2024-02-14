@@ -18,6 +18,7 @@ import {
   updatePositionConvRecruiter,
   autoCreateCardsCandidatesAndScore,
   connectMemoriesToKnowledgeGraph_V2,
+  pingNeo4j,
   wait,
 } from "./backEnd_api_func.js";
 
@@ -116,7 +117,7 @@ let repeatCalculateCVsummaryJobsNodesVar = setInterval(repeatCalculateCVsummaryJ
 
 
 // --------------- repeatKeepNeo4jOpen ----------------
-let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
+let repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen,  60 * 60 * 1000);
 // --------------- repeatKeepNeo4jOpen ----------------
 
 
@@ -417,18 +418,13 @@ async function repeatKeepNeo4jOpen() {
   // run a function every day just to keep open the neo4j
 
 
-  let res_t = await findOneNode();
+  let rt = await pingNeo4j();
 
-  if (res_t && res_t.data && res_t.data.data && res_t.data.data.findNodes) {
-    let res_k = res_t.data.data.findNodes;
-    
-    let rt = await matchPrepareNode(res_k[0]._id, "Member");
-    
-  }
+  console.log("rt = ", rt);
 
   clearInterval(repeatKeepNeo4jOpenVar);
   
-  repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 24 * 60 * 60 * 1000);
+  repeatKeepNeo4jOpenVar = setInterval(repeatKeepNeo4jOpen, 60 * 60 * 1000);
 }
 
 // console.log("res findSkillsToRecalculate= " )
